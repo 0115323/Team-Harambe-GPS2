@@ -4,18 +4,34 @@ using System.Collections;
 public class BulletScript : MonoBehaviour {
 
     public float speed;
+    public float distanceTraveled;
+    public float range;
 
-    private float Timer = 4f;
-    private float maxTimer = 4f;
+   // private float Timer = 4f;
+   // private float maxTimer = 4f;
 
-	// Use this for initialization
-	void Start () 
+    void Update()
     {
-	
-	}
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    void OnEnable()
+    {
+        Invoke("Destroy", 2f);
+    }
+
+    void Destroy()
+    {
+        gameObject.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
+    }
 	
 	// Update is called once per frame
-	void Update () 
+	/*void Update () 
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         Timer -= Time.deltaTime;
@@ -27,5 +43,5 @@ public class BulletScript : MonoBehaviour {
             Timer = maxTimer;
         }
 
-	}
+	}*/
 }

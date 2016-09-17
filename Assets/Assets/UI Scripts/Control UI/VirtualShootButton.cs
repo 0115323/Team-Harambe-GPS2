@@ -23,19 +23,21 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
     {
         ShootInputDirection = Vector3.zero;
 
-        Vector2 pos = Vector2.zero;
+        Vector2 pos = Vector3.zero;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(shootButtonBG.rectTransform, ped.position, ped.pressEventCamera, out pos))
         {
-            pos.x = (pos.x / shootButtonBG.rectTransform.sizeDelta.x);
-            pos.y = (pos.y / shootButtonBG.rectTransform.sizeDelta.y);
+            //I To make the inner joystick to rotate inside the BG only.
+            pos.x = 2f*(pos.x / shootButtonBG.rectTransform.sizeDelta.x);
+            pos.y = 2f*(pos.y / shootButtonBG.rectTransform.sizeDelta.y);
 
             //I Still in progress to understand the code. Especially what is the question mark is for and stuff.
-            float x = (shootButtonBG.rectTransform.pivot.x == 1) ? pos.x * 2 + 1 : pos.x * 2 - 1;
+            float x = (shootButtonBG.rectTransform.pivot.x == 1) ? pos.x * 2 - 1 : pos.x * 2 + 1;
             float y = (shootButtonBG.rectTransform.pivot.y == 1) ? pos.y * 2 + 1 : pos.y * 2 - 1;
 
             ShootInputDirection = new Vector3(x,0,y);
 
             ShootInputDirection = (ShootInputDirection.magnitude > 1) ? ShootInputDirection.normalized : ShootInputDirection;
+
 
             //I This code is to avoid the middle circle to get out from the image joystick background. It will keep inside it.
             shootButtonJoyStickImage.rectTransform.anchoredPosition = new Vector3(ShootInputDirection.x * (shootButtonBG.rectTransform.sizeDelta.x / 3), ShootInputDirection.z * (shootButtonBG.rectTransform.sizeDelta.y/ 3));
@@ -43,7 +45,17 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
             //IDebug.Log("OnDrag");
             //IDebug.Log(InputDirection);
 
+
         }
+        /*if (ShootInputDirection.magnitude > 0.6f)
+        {
+            Debug.Log("Shoot Input Magnitude: " + ShootInputDirection.magnitude);
+
+        }*/
+
+        //Debug.Log("POS " + pos);
+        //Debug.Log("POS X : " + pos.x);
+        //Debug.Log("POS Y : " + pos.y);
     }
 
     public virtual void  OnPointerDown(PointerEventData ped)
@@ -53,8 +65,8 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
 
     public virtual void OnPointerUp(PointerEventData ped)
     {
+        //I This is to reset the middle joystick button to reset to its original position instead of making it stick to the background
         ShootInputDirection = Vector3.zero;
-        //I This is to reset the middle joystick button to reset to its original position instead of making it stick to the background and stuff.
         shootButtonJoyStickImage.rectTransform.anchoredPosition = Vector3.zero;
     }
 

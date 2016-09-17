@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{45AFD0A1-0F27-BE3E-9CDC-580C28A15182}</ProjectGuid>
+    <ProjectGuid>{17533FA3-357A-CEC6-ED1C-9FA92629C572}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -45,11 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BulletScript.cs" />
+     <Compile Include="Assets\Scripts\AI\StalkerNavigation.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\ShootHateScript.cs" />
-     <Compile Include="Assets\Scripts\ShootScript.cs" />
+     <Compile Include="Assets\Scripts\Player Script\BulletScript.cs" />
+     <Compile Include="Assets\Scripts\Player Script\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Player Script\ShootScript.cs" />
      <Compile Include="Assets\UI Scripts\Control UI\VirtualJoystick.cs" />
      <Compile Include="Assets\UI Scripts\Control UI\VirtualShootButton.cs" />
  <Reference Include="UnityEngine.UI">

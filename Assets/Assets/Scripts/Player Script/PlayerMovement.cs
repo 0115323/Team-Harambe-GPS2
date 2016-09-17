@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -16,11 +17,19 @@ public class PlayerMovement : MonoBehaviour {
 
     public ShootScript shooting;
 
-    private float shotCounter = 2f;
+    private float shotCounter = 0.4f;
 
     public GameObject loveBullet;
     public GameObject hateBullet;
 
+
+
+    public int pooledAmount;
+    List<GameObject> loveBullets;
+    List<GameObject> hateBullets;
+
+    private int maxPooledLoveBullets = 10;
+    private int maxPooledHateBullets = 10;
 
     public bool fired;
 
@@ -29,11 +38,32 @@ public class PlayerMovement : MonoBehaviour {
     void Awake()
     {
         
+        //I Object pooling for the love bullets
+        loveBullets = new List<GameObject>();
+        for (int i = 0; i < maxPooledLoveBullets; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(loveBullet);
+            obj.SetActive(false);
+            loveBullets.Add(obj);
+        }
+
+
+        //I Object pooling for the love bullets
+        hateBullets = new List<GameObject>();
+        for (int i = 0; i < maxPooledHateBullets; i++)
+        {
+            GameObject obj = (GameObject)Instantiate(hateBullet);
+            obj.SetActive(false);
+            hateBullets.Add(obj);
+        }
+
+
     }
 
 	// Use this for initialization
 	void Start () 
     {
+        
         myRigidBody = GetComponent<Rigidbody>();
         //I To find the reference to the camera
         mainCamera = FindObjectOfType<Camera>();
@@ -63,42 +93,62 @@ public class PlayerMovement : MonoBehaviour {
             /*Quaternion targetRotation = Quaternion.LookRotation(moveControl.InputDirection, Vector3.up);
             this.transform.rotation = targetRotation;*/
         }
-
         //I This code is to rotate the player and shooting
         if (shootControl.ShootInputDirection != Vector3.zero)
         {
-            
+
             //I This code is to rotate the player dependant on the joystick
             Quaternion targetRotation = Quaternion.LookRotation(shootControl.ShootInputDirection, Vector3.up);
             this.transform.rotation = targetRotation;
 
-            fired = true;
-            if (fired == true)
+            //I To detect the player how far the middle circle for the player have dragged and then the player shoot
+            if (shootControl.ShootInputDirection.magnitude >= 0.9f)
             {
-                shotCounter -= Time.deltaTime;
-                if (shotCounter <= 0)
+                fired = true;
+                if (fired == true)
                 {
-                    if (shooting.GetComponent<ShootScript>().shootType == ShootingType.LoveType)
+                    shotCounter -= Time.deltaTime;
+                    if (shotCounter <= 0)
                     {
-                        //I This will reset the shot counter back to the full value of time between shots
-                        shotCounter = timeBetweenShots;
-                        //I To instantiate at where the gun was point to.
-                        BulletScript newBullet = Instantiate(loveBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
+                        if (shooting.GetComponent<ShootScript>().shootType == ShootingType.LoveType)
+                        {
+                            //I This will reset the shot counter back to the full value of time between shots
+                            shotCounter = timeBetweenShots;
+                            //I To instantiate at where the gun was point to.
+                            //I BulletScript newBullet = Instantiate(loveBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
+                            //I This is part for the pooled object
+                            for (int i = 0; i < loveBullets.Count; i++)
+                            {
+                                if (!loveBullets[i].activeInHierarchy)
+                                {
+                                    loveBullets[i].transform.position = shooting.firePoint.position;
+                                    loveBullets[i].transform.rotation = shooting.firePoint.rotation;
+                                    loveBullets[i].SetActive(true);
+                                    break;
+                                }
+                            }
+                        }
+                        if (shooting.GetComponent<ShootScript>().shootType == ShootingType.HateType)
+                        {
+                            //I This will reset the shot counter back to the full value of time between shots
+                            shotCounter = timeBetweenShots;
+                            //I To instantiate at where the gun was point to.
+                            //I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
+                            for (int i = 0; i < loveBullets.Count; i++)
+                            {
+                                if (!hateBullets[i].activeInHierarchy)
+                                {
+                                    hateBullets[i].transform.position = shooting.firePoint.position;
+                                    hateBullets[i].transform.rotation = shooting.firePoint.rotation;
+                                    hateBullets[i].SetActive(true);
+                                    break;
+                                }
+                            }
+
+                        }                 
                     }
-                    if (shooting.GetComponent<ShootScript>().shootType == ShootingType.HateType)
-                    {
-                        //I This will reset the shot counter back to the full value of time between shots
-                        shotCounter = timeBetweenShots;
-                        //I To instantiate at where the gun was point to.
-                        BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
-                    }                 
                 }
             }
-
-
-
-
-            //IDebug.Log("FIRING");
         }
             
         //float rayLength;
@@ -131,17 +181,17 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetMouseButtonUp(0))
         {
             theGun.isFiring = false;
-        }*/
-        //I ========================================== END OF THE PC CODE TEST ==========================================================
+        }
 
 
 
         if (Input.GetKey("escape"))
         {
             Application.Quit();
-        }
+        }*/
+        //I ========================================== END OF THE PC CODE TEST ==========================================================
 
-	}
+    }
 
 
 
@@ -155,7 +205,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         if(col.gameObject.CompareTag("Building"))
             {
-                Debug.Log("Collided");
+               // Debug.Log("Collided");
             }
 
     }

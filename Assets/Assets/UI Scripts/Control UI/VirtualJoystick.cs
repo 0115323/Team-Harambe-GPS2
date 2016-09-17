@@ -29,8 +29,8 @@ public class VirtualJoystick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPoi
         Vector2 pos = Vector2.zero;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(joystickBG.rectTransform, ped.position, ped.pressEventCamera, out pos))
         {
-            pos.x = (pos.x / joystickBG.rectTransform.sizeDelta.x);
-            pos.y = (pos.y / joystickBG.rectTransform.sizeDelta.y);
+            pos.x = 2f*(pos.x / joystickBG.rectTransform.sizeDelta.x);
+            pos.y = 2f*(pos.y / joystickBG.rectTransform.sizeDelta.y);
 
             //I Still in progress to understand the code. Especially what is the question mark is for and stuff.
             float x = (joystickBG.rectTransform.pivot.x == 1) ? pos.x * 2 + 1 : pos.x * 2 - 1;

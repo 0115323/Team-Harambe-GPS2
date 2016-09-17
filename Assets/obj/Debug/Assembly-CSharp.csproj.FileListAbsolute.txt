@@ -40,3 +40,45 @@ I:\LoveGunProject-master\Temp\bin\Debug\UnityEngine.Networking.xml
 I:\LoveGunProject-master\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 I:\LoveGunProject-master\obj\Debug\Assembly-CSharp.dll
 I:\LoveGunProject-master\obj\Debug\Assembly-CSharp.pdb
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Assembly-CSharp.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Assembly-CSharp.pdb
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEditor.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.Networking.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.UI.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Mono.Cecil.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.SerializationLogic.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.DataContract.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.UNetWeaver.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.CecilTools.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.xml
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEditor.xml
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.UI.xml
+I:\GitHub\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.Networking.xml
+I:\GitHub\Team Harambe GPS2 Projects\Assets\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+I:\GitHub\Team Harambe GPS2 Projects\Assets\obj\Debug\Assembly-CSharp.dll
+I:\GitHub\Team Harambe GPS2 Projects\Assets\obj\Debug\Assembly-CSharp.pdb
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Assembly-CSharp.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Assembly-CSharp.pdb
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEditor.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.Networking.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.UI.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Mono.Cecil.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.SerializationLogic.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.DataContract.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.UNetWeaver.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Unity.CecilTools.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.xml
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEditor.xml
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.UI.xml
+I:\Team Harambe GPS2 Projects\Assets\Temp\bin\Debug\UnityEngine.Networking.xml
+I:\Team Harambe GPS2 Projects\Assets\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+I:\Team Harambe GPS2 Projects\Assets\obj\Debug\Assembly-CSharp.dll
+I:\Team Harambe GPS2 Projects\Assets\obj\Debug\Assembly-CSharp.pdb
