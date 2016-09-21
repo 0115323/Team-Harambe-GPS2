@@ -22,41 +22,17 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject loveBullet;
     public GameObject hateBullet;
 
-
-
-    public int pooledAmount;
-    List<GameObject> loveBullets;
-    List<GameObject> hateBullets;
-
-    private int maxPooledLoveBullets = 10;
-    private int maxPooledHateBullets = 10;
-
     public bool fired;
 
     public float timeBetweenShots;
 
+	public Stat haremMeter;
+    public Stat yaoiMeter;
+
     void Awake()
     {
-        
-        //I Object pooling for the love bullets
-        loveBullets = new List<GameObject>();
-        for (int i = 0; i < maxPooledLoveBullets; i++)
-        {
-            GameObject obj = (GameObject)Instantiate(loveBullet);
-            obj.SetActive(false);
-            loveBullets.Add(obj);
-        }
-
-
-        //I Object pooling for the love bullets
-        hateBullets = new List<GameObject>();
-        for (int i = 0; i < maxPooledHateBullets; i++)
-        {
-            GameObject obj = (GameObject)Instantiate(hateBullet);
-            obj.SetActive(false);
-            hateBullets.Add(obj);
-        }
-
+        yaoiMeter.Initialize();
+		haremMeter.Initialize();
 
     }
 
@@ -115,18 +91,12 @@ public class PlayerMovement : MonoBehaviour {
                             //I This will reset the shot counter back to the full value of time between shots
                             shotCounter = timeBetweenShots;
                             //I To instantiate at where the gun was point to.
-                            //I BulletScript newBullet = Instantiate(loveBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
                             //I This is part for the pooled object
-                            for (int i = 0; i < loveBullets.Count; i++)
-                            {
-                                if (!loveBullets[i].activeInHierarchy)
-                                {
-                                    loveBullets[i].transform.position = shooting.firePoint.position;
-                                    loveBullets[i].transform.rotation = shooting.firePoint.rotation;
-                                    loveBullets[i].SetActive(true);
-                                    break;
-                                }
-                            }
+                            Invoke("FireLoveBullets",shotCounter);
+
+                            //I TESTING BAR SCRIPT
+                            haremMeter.CurrentVal += 1;
+
                         }
                         if (shooting.GetComponent<ShootScript>().shootType == ShootingType.HateType)
                         {
@@ -134,17 +104,10 @@ public class PlayerMovement : MonoBehaviour {
                             shotCounter = timeBetweenShots;
                             //I To instantiate at where the gun was point to.
                             //I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
-                            for (int i = 0; i < loveBullets.Count; i++)
-                            {
-                                if (!hateBullets[i].activeInHierarchy)
-                                {
-                                    hateBullets[i].transform.position = shooting.firePoint.position;
-                                    hateBullets[i].transform.rotation = shooting.firePoint.rotation;
-                                    hateBullets[i].SetActive(true);
-                                    break;
-                                }
-                            }
+                            Invoke("FireHateBullets",shotCounter);
 
+                            //I TESTING BAR SCRIPT
+                            yaoiMeter.CurrentVal += 1;
                         }                 
                     }
                 }
@@ -193,6 +156,27 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
+
+    void FireLoveBullets()
+    {
+    GameObject obj = ObjectPoolingManager.objPoolManager.GetLoveBulletsPooledObject();
+
+    if (obj == null) return;
+    obj.transform.position = shooting.firePoint.position;
+    obj.transform.rotation = shooting.firePoint.rotation;
+    obj.SetActive(true);
+    }
+
+
+    void FireHateBullets()
+    {
+    GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();
+
+    if (obj == null) return;
+    obj.transform.position = shooting.firePoint.position;
+    obj.transform.rotation = shooting.firePoint.rotation;
+    obj.SetActive(true);
+    }
 
 
     //I Consistant Update
