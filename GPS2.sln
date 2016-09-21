@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{533ED007-AFF1-063F-8CFA-A8F705271A9D}") = "GPS2", "Assembly-CSharp.csproj", "{D848387E-ABC6-36AD-D1C1-B067DFDC8627}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D848387E-ABC6-36AD-D1C1-B067DFDC8627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D848387E-ABC6-36AD-D1C1-B067DFDC8627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D848387E-ABC6-36AD-D1C1-B067DFDC8627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D848387E-ABC6-36AD-D1C1-B067DFDC8627}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
