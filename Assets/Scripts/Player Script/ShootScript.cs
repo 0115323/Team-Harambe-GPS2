@@ -23,15 +23,29 @@ public class ShootScript : MonoBehaviour {
 
 
 
-    public void Change()
+    public void ChangeToLove()
     {
     if (shootType == ShootingType.LoveType)
     {
-    shootType = ShootingType.HateType;
+            shootType = ShootingType.LoveType;
     }
     else if(shootType == ShootingType.HateType)
     {
-    shootType = ShootingType.LoveType;
+            shootType = ShootingType.LoveType;
     }
+    }
+
+
+
+    public void ChangeToHate()
+    {
+        if (shootType == ShootingType.LoveType)
+        {
+            shootType = ShootingType.HateType;
+        }
+        else if(shootType == ShootingType.HateType)
+        {
+            shootType = ShootingType.HateType;
+        }
     }
 }

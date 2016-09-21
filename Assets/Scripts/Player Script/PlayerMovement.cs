@@ -113,46 +113,6 @@ public class PlayerMovement : MonoBehaviour {
                 }
             }
         }
-            
-        //float rayLength;
-
-        //I============================================== FOR PC TEST ===========================================================
-        //I This is for the player point to look at using mouse, need to figure out how to do from the joystick part.
-
-        //I where the camera ray intercepts anywhere else, the float raylength will be set to the value to this whatever camera hits.
-
-
-        /*if(groundPlane.Raycast(cameraRay, out rayLength))
-            {
-                //I We set a point a space to actually to set the camera to look at
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-
-                Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
-            //I the code above to understand, try run the game, you will notice a blue line, the player will look at where the mouse was pointed.
-
-            //I This code will tilted the player to look where the mouse was pointing and it will tilted
-            //Itransform.LookAt(pointToLook);
-
-            //I This code will stop the player from tilted to look at, which is making it look really weird
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-            }*/
-
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            theGun.isFiring = true;
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            theGun.isFiring = false;
-        }
-
-
-
-        if (Input.GetKey("escape"))
-        {
-            Application.Quit();
-        }*/
-        //I ========================================== END OF THE PC CODE TEST ==========================================================
 
     }
 
@@ -194,6 +154,47 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-    //I =========================================END OF THE PC TEST SCRIPT ======================================
-
 }
+
+
+
+
+//float rayLength;
+
+//I============================================== FOR PC TEST ===========================================================
+//I This is for the player point to look at using mouse, need to figure out how to do from the joystick part.
+
+//I where the camera ray intercepts anywhere else, the float raylength will be set to the value to this whatever camera hits.
+
+
+/*if(groundPlane.Raycast(cameraRay, out rayLength))
+            {
+                //I We set a point a space to actually to set the camera to look at
+            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+
+                Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+            //I the code above to understand, try run the game, you will notice a blue line, the player will look at where the mouse was pointed.
+
+            //I This code will tilted the player to look where the mouse was pointing and it will tilted
+            //Itransform.LookAt(pointToLook);
+
+            //I This code will stop the player from tilted to look at, which is making it look really weird
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            }*/
+
+/*if (Input.GetMouseButtonDown(0))
+{
+    theGun.isFiring = true;
+}
+if (Input.GetMouseButtonUp(0))
+{
+    theGun.isFiring = false;
+}
+
+
+
+if (Input.GetKey("escape"))
+{
+    Application.Quit();
+}*/
+//I ========================================== END OF THE PC CODE TEST ==========================================================
