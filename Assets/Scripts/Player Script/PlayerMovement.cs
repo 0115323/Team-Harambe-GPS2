@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour {
 
     public ShootScript shooting;
 
-    private float shotCounter = 0.4f;
 
     public GameObject loveBullet;
     public GameObject hateBullet;
@@ -25,6 +24,10 @@ public class PlayerMovement : MonoBehaviour {
     public bool fired;
 
     public float timeBetweenShots;
+    private float shotTimer = 0f;
+
+    public GunType currentGun = GunType.Pistol;
+
 
 	public Stat haremMeter;
     public Stat yaoiMeter;
@@ -46,9 +49,11 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 	
-	// Update is called once per frame
-	void Update () 
+
+	void FixedUpdate () 
     {
+        myRigidBody.velocity = moveVelocity;
+
         fired = false;
 
         //I We want to get a specific control and using a z value to move the player. If using a y value, it will move the player up to the sky.
@@ -72,45 +77,50 @@ public class PlayerMovement : MonoBehaviour {
         //I This code is to rotate the player and shooting
         if (shootControl.ShootInputDirection != Vector3.zero)
         {
-
             //I This code is to rotate the player dependant on the joystick
             Quaternion targetRotation = Quaternion.LookRotation(shootControl.ShootInputDirection, Vector3.up);
             this.transform.rotation = targetRotation;
+
+
 
             //I To detect the player how far the middle circle for the player have dragged and then the player shoot
             if (shootControl.ShootInputDirection.magnitude >= 0.9f)
             {
                 fired = true;
-                if (fired == true)
+                if (currentGun == GunType.Pistol)
                 {
-                    shotCounter -= Time.deltaTime;
-                    if (shotCounter <= 0)
+                    if (fired == true)
                     {
-                        if (shooting.GetComponent<ShootScript>().shootType == ShootingType.LoveType)
+                        shotTimer -= Time.deltaTime;
+                        if (shotTimer <= 0)
                         {
-                            //I This will reset the shot counter back to the full value of time between shots
-                            shotCounter = timeBetweenShots;
-                            //I To instantiate at where the gun was point to.
-                            //I This is part for the pooled object
-                            Invoke("FireLoveBullets",shotCounter);
+                            if (shooting.GetComponent<ShootScript>().shootType == ShootingType.LoveType)
+                            {
+                                //I This will reset the shot counter back to the full value of time between shots
+                                //I To instantiate at where the gun was point to.
+                                //I This is part for the pooled object
+                                Invoke("FireLoveBullets",shotTimer);
+                                shotTimer = timeBetweenShots;
 
-                            //I TESTING BAR SCRIPT
-                            haremMeter.CurrentVal += 1;
+                                //I TESTING BAR SCRIPT
+                                //I haremMeter.CurrentVal += 1;
 
+                            }
+                            if (shooting.GetComponent<ShootScript>().shootType == ShootingType.HateType)
+                            {
+                                //I This will reset the shot counter back to the full value of time between shots
+                                //I To instantiate at where the gun was point to.
+                                //I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
+                                Invoke("FireHateBullets",shotTimer);
+                                shotTimer = timeBetweenShots;
+
+                                //I TESTING BAR SCRIPT
+                                //I yaoiMeter.CurrentVal += 1;
+                            }                 
                         }
-                        if (shooting.GetComponent<ShootScript>().shootType == ShootingType.HateType)
-                        {
-                            //I This will reset the shot counter back to the full value of time between shots
-                            shotCounter = timeBetweenShots;
-                            //I To instantiate at where the gun was point to.
-                            //I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
-                            Invoke("FireHateBullets",shotCounter);
-
-                            //I TESTING BAR SCRIPT
-                            yaoiMeter.CurrentVal += 1;
-                        }                 
                     }
                 }
+
             }
         }
 
@@ -136,13 +146,6 @@ public class PlayerMovement : MonoBehaviour {
     obj.transform.position = shooting.firePoint.position;
     obj.transform.rotation = shooting.firePoint.rotation;
     obj.SetActive(true);
-    }
-
-
-    //I Consistant Update
-    void FixedUpdate()
-    {
-        myRigidBody.velocity = moveVelocity;
     }
 
     void OnCollisionEnter (Collision col)

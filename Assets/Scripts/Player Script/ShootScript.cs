@@ -2,14 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 
-//I ========================= To Control The Shooting Mode ==============================
-public enum ShootingType
-{
-    LoveType,
-    HateType
-}
-//I ======================== End Of the Shooting Mode Enum ==============================
-
 
 public class ShootScript : MonoBehaviour {
 
