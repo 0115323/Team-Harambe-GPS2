@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FE1EDAF3-5684-07B0-6BEB-ED5B9C62E9C5}</ProjectGuid>
+    <ProjectGuid>{5DAA4F07-A039-B10D-672B-361497CAC395}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -45,9 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DetectMoveTouch.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
+     <Compile Include="Assets\MainManager.cs" />
      <Compile Include="Assets\Scripts\AI\NPCScript.cs" />
      <Compile Include="Assets\Scripts\AI\StalkerNavigation.cs" />
+     <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
      <Compile Include="Assets\Scripts\Manager Scripts\LoadManager.cs" />
      <Compile Include="Assets\Scripts\Manager Scripts\MainManager.cs" />
