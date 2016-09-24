@@ -4,7 +4,6 @@ using System.Collections;
 public class SpawnManager : MonoBehaviour {
 
 
-    public GameObject femaleNPC1;
     public float spawnTime;
     public Transform[] spawnPoints;
 
@@ -14,10 +13,11 @@ public class SpawnManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
     {
-        InvokeRepeating("Spawn", spawnTime, spawnTime);
+        InvokeRepeating("SpawnFemaleNPC", spawnTime, spawnTime);
+        InvokeRepeating("SpawnMaleNPC", spawnTime, spawnTime);
 	}
 	
-    void Spawn()
+    void SpawnFemaleNPC()
     {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
@@ -28,6 +28,19 @@ public class SpawnManager : MonoBehaviour {
         npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
         npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
         npcOBJ.SetActive(true);
+    }
 
+
+    void SpawnMaleNPC()
+    {
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+
+        GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetMaleNPCType1();
+
+        if (npcOBJ == null)
+            return;
+        npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
+        npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
+        npcOBJ.SetActive(true);
     }
 }

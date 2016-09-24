@@ -9,7 +9,7 @@ public class BarScript : MonoBehaviour
 	public float lerpSpeed;
 
 	[SerializeField]
-	private Image Content;
+    private Image Content;
 
 	public float MaxValue {get; set;}
 
@@ -22,7 +22,7 @@ public class BarScript : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void LateUpdate () 
 	{
 		HandleBar();
 	}

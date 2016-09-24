@@ -8,8 +8,6 @@ public class ObjectPoolingManager : MonoBehaviour {
 
     public static ObjectPoolingManager objPoolManager;
 
-    public int bulletPooledAmount;
-
 
     List<GameObject> loveBulletsList;
     List<GameObject> hateBulletsList;
@@ -158,6 +156,13 @@ public class ObjectPoolingManager : MonoBehaviour {
             {
                 return maleNPCList[i];
             }
+        }
+
+        if (willGrow)
+        {
+            GameObject obj = (GameObject)Instantiate(maleNPCType1);
+            maleNPCList.Add(obj);
+            return obj;
         }
 
         return null;

@@ -8,12 +8,12 @@ namespace Manager
 {
     public class LoadManager : MonoBehaviour {
 
-        public GameObject Managers;
         public GameObject objPoolingManager;
         public GameObject soundManager;
 
         void Awake()
         {
+
             //I To create the object pooling manager
            if (MainManager.instance == null)
             {

@@ -1,19 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
+
 public class BulletScript : MonoBehaviour {
 
     public float speed;
     public float distanceTraveled;
     public float range;
 
+    public GameManagerScript gameManager;
+
+    public float meterIncreaseValue;
 
    // private float Timer = 4f;
    // private float maxTimer = 4f;
     Vector3 lastPosition;
 
+    public BulletType bulletType = BulletType.LoveBullet;
 
-    public ShootScript firepoint;
+
+    void Start()
+    {
+        //I Adding a Game Manager function to this bullet
+        gameManager = GameObject.Find("UI").GetComponent<GameManagerScript>();
+    }
+
 
     void Update()
     {
@@ -41,7 +54,6 @@ public class BulletScript : MonoBehaviour {
 
     void Destroy()
     {
-
         gameObject.SetActive(false);
     }
 
@@ -49,14 +61,52 @@ public class BulletScript : MonoBehaviour {
     {
         CancelInvoke();
     }
+
+    public void OnCollisionEnter(Collision col)
+    {
+        if (bulletType == BulletType.LoveBullet)
+        {
+            if (col.gameObject.CompareTag("FemaleNPC"))
+            {
+                //Debug.Log("COLLIDED");
+                gameObject.SetActive(false);
+                col.gameObject.SetActive(false);
+                gameManager.GetComponent<GameManagerScript>().haremMeter.CurrentVal += meterIncreaseValue;
+            }
+            if (col.gameObject.CompareTag("MaleNPC"))
+            {
+                //Debug.Log("GAY METER INCREASED");
+                gameObject.SetActive(false);
+                col.gameObject.SetActive(false);
+                gameManager.GetComponent<GameManagerScript>().yaoiMeter.CurrentVal += meterIncreaseValue;
+            }
+        }
+        else if (bulletType == BulletType.HateBullet)
+        {
+            if (col.gameObject.CompareTag("FemaleNPC"))
+            {
+                //Debug.Log("COLLIDED");
+                gameObject.SetActive(false);
+                col.gameObject.SetActive(false);
+                gameManager.GetComponent<GameManagerScript>().haremMeter.CurrentVal -= meterIncreaseValue;
+            }
+            if (col.gameObject.CompareTag("MaleNPC"))
+            {
+                gameObject.SetActive(false);
+                col.gameObject.SetActive(false);
+                gameManager.GetComponent<GameManagerScript>().yaoiMeter.CurrentVal -= meterIncreaseValue;
+            }
+        }
+    }
 	
-    void OnCollisionEnter (Collision col)
+    /*void OnCollisionEnter (Collision col)
     {
         if(col.gameObject.CompareTag("FemaleNPC"))
         {
             Debug.Log("Collided");
             gameObject.SetActive(false);
             col.gameObject.SetActive(false);
+            this.GetComponent<GameManagerScript>().haremMeter.CurrentVal += 1;
         }
 
     }

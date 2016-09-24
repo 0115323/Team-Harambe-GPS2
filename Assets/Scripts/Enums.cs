@@ -1,5 +1,10 @@
 ﻿
-
+//I ======================== BULLET TYPE ======================================
+public enum BulletType
+{
+    LoveBullet,
+    HateBullet
+}
 
 
 //I ========================= To Control The Shooting Mode ==============================

@@ -17,10 +17,6 @@ public class PlayerMovement : MonoBehaviour {
 
     public ShootScript shooting;
 
-
-    public GameObject loveBullet;
-    public GameObject hateBullet;
-
     public bool fired;
 
     public float timeBetweenShots;
@@ -29,20 +25,16 @@ public class PlayerMovement : MonoBehaviour {
     public GunType currentGun = GunType.Pistol;
 
 
-	public Stat haremMeter;
-    public Stat yaoiMeter;
-
-    void Awake()
-    {
-        yaoiMeter.Initialize();
-		haremMeter.Initialize();
-
-    }
-
 	// Use this for initialization
 	void Start () 
     {
-        
+        //I Register the move control on start on the player
+        moveControl = GameObject.Find("UI").GetComponentInChildren<VirtualJoystick>();
+
+        //I Register the shoot control on start on the player
+        shootControl = GameObject.Find("UI").GetComponentInChildren<VirtualShootButton>();
+
+
         myRigidBody = GetComponent<Rigidbody>();
         //I To find the reference to the camera
         mainCamera = FindObjectOfType<Camera>();

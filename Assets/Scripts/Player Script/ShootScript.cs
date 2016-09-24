@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShootScript : MonoBehaviour {
 
-    public Button button;
     public Color newColor;
 
 
@@ -13,6 +12,10 @@ public class ShootScript : MonoBehaviour {
     public Transform firePoint;
 
 
+    void Start()
+    {
+        
+    }
 
 
     public void ChangeToLove()
