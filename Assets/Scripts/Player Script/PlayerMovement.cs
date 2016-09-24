@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
             //I To detect the player how far the middle circle for the player have dragged and then the player shoot
-            if (shootControl.ShootInputDirection.magnitude >= 0.9f)
+            if (shootControl.ShootInputDirection.magnitude >= 0.99f)
             {
                 fired = true;
                 if (currentGun == GunType.Pistol)
@@ -126,10 +126,12 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-
+    //I To fire the love bullets
     void FireLoveBullets()
     {
+        //I Getting a script from the object pool manager and getting the pooled objects
     GameObject obj = ObjectPoolingManager.objPoolManager.GetLoveBulletsPooledObject();
+
 
     if (obj == null) return;
     obj.transform.position = shooting.firePoint.position;
@@ -137,7 +139,7 @@ public class PlayerMovement : MonoBehaviour {
     obj.SetActive(true);
     }
 
-
+    //I To fire the hate bullets
     void FireHateBullets()
     {
     GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();

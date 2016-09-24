@@ -21,20 +21,17 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
 
     public virtual void OnDrag(PointerEventData ped)
     {
-        ShootInputDirection = Vector3.zero;
 
-        Vector2 pos = Vector3.zero;
+        Vector2 pos;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(shootButtonBG.rectTransform, ped.position, ped.pressEventCamera, out pos))
         {
             //I To make the inner joystick to rotate inside the BG only.
             pos.x = 2f*(pos.x / shootButtonBG.rectTransform.sizeDelta.x);
             pos.y = 2f*(pos.y / shootButtonBG.rectTransform.sizeDelta.y);
 
-            //I Still in progress to understand the code. Especially what is the question mark is for and stuff.
-            float x = (shootButtonBG.rectTransform.pivot.x == 1) ? pos.x * 2 - 1 : pos.x * 2 + 1;
-            float y = (shootButtonBG.rectTransform.pivot.y == 1) ? pos.y * 2 + 1 : pos.y * 2 - 1;
 
-            ShootInputDirection = new Vector3(x,0,y);
+            ShootInputDirection = new Vector3(pos.x,0,pos.y);
+
 
             ShootInputDirection = (ShootInputDirection.magnitude > 1) ? ShootInputDirection.normalized : ShootInputDirection;
 
@@ -61,6 +58,7 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
     public virtual void  OnPointerDown(PointerEventData ped)
     {
         OnDrag(ped);
+       
     }
 
     public virtual void OnPointerUp(PointerEventData ped)

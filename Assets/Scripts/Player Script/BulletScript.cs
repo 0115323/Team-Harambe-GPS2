@@ -7,6 +7,7 @@ public class BulletScript : MonoBehaviour {
     public float distanceTraveled;
     public float range;
 
+
    // private float Timer = 4f;
    // private float maxTimer = 4f;
     Vector3 lastPosition;
@@ -49,6 +50,19 @@ public class BulletScript : MonoBehaviour {
         CancelInvoke();
     }
 	
+    void OnCollisionEnter (Collision col)
+    {
+        if(col.gameObject.CompareTag("FemaleNPC"))
+        {
+            Debug.Log("Collided");
+            gameObject.SetActive(false);
+            col.gameObject.SetActive(false);
+        }
+
+    }
+
+
+
 	// Update is called once per frame
 	/*void Update () 
     {
