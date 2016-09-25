@@ -9,6 +9,7 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
     private Image shootButtonBG;
     private Image shootButtonJoyStickImage;
 
+    public float sensitivity;
 
     public Vector3 ShootInputDirection{ set; get; }
 
@@ -26,8 +27,8 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(shootButtonBG.rectTransform, ped.position, ped.pressEventCamera, out pos))
         {
             //I To make the inner joystick to rotate inside the BG only.
-            pos.x = 2f*(pos.x / shootButtonBG.rectTransform.sizeDelta.x);
-            pos.y = 2f*(pos.y / shootButtonBG.rectTransform.sizeDelta.y);
+            pos.x = sensitivity*(pos.x / shootButtonBG.rectTransform.sizeDelta.x);
+            pos.y = sensitivity*(pos.y / shootButtonBG.rectTransform.sizeDelta.y);
 
 
             ShootInputDirection = new Vector3(pos.x,0,pos.y);

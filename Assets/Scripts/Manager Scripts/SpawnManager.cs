@@ -1,18 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class SpawnManager : MonoBehaviour {
+    //I Work in progress. Will be fully implemented
 
 
     public float spawnTime;
+
     public Transform[] spawnPoints;
 
-
-    //I Work in progress. Will be fully implemented
-
-	// Use this for initialization
 	void Start () 
     {
+        //I This function is to find the gameobject tagged with Spawners
+        GameObject[] spawner = GameObject.FindGameObjectsWithTag("Spawners");
+        //I To get the total length of spawner array and then add it to spawnpoints array
+        spawnPoints = new Transform[spawner.Length];
+
+        //I Convert every array of gameobject to a transform
+        for (int i = 0; i < spawnPoints.Length; i++)
+            spawnPoints[i] = spawner[i].transform;
+
+        //IDebug.Log(spawnPoints.Length);
+
+
         InvokeRepeating("SpawnFemaleNPC", spawnTime, spawnTime);
         InvokeRepeating("SpawnMaleNPC", spawnTime, spawnTime);
 	}

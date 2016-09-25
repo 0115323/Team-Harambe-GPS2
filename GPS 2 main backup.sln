@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{EAEAD51E-09B0-7B45-60B1-30B998FA063E}") = "GPS 2 main backup", "Assembly-CSharp.csproj", "{1AA34F12-5FBB-413C-76E9-7F194E3FA362}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AA34F12-5FBB-413C-76E9-7F194E3FA362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA34F12-5FBB-413C-76E9-7F194E3FA362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA34F12-5FBB-413C-76E9-7F194E3FA362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA34F12-5FBB-413C-76E9-7F194E3FA362}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

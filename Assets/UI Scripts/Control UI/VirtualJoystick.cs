@@ -34,8 +34,8 @@ public class VirtualJoystick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPoi
 
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(joystickBG.rectTransform, ped.position, ped.pressEventCamera, out pos))
         {
-            pos.x = 2f*(pos.x / joystickBG.rectTransform.sizeDelta.x);
-            pos.y = 2f*(pos.y / joystickBG.rectTransform.sizeDelta.y);
+            pos.x =sensitivity* (pos.x / joystickBG.rectTransform.sizeDelta.x);
+            pos.y =sensitivity* (pos.y / joystickBG.rectTransform.sizeDelta.y);
 
 
             InputDirection = new Vector3(pos.x,0,pos.y);

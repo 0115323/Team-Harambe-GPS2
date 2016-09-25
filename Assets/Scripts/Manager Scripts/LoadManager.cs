@@ -11,6 +11,8 @@ namespace Manager
         public GameObject objPoolingManager;
         public GameObject soundManager;
 
+        public GameObject spawnManager;
+
         void Awake()
         {
 
@@ -24,6 +26,10 @@ namespace Manager
             if (MainManager.instance == null)
             {
                 Instantiate(soundManager);
+            }
+            if (MainManager.instance == null)
+            {
+                Instantiate(spawnManager);
             }
         }
     }
