@@ -10,7 +10,7 @@ public class BulletScript : MonoBehaviour {
     public float distanceTraveled;
     public float range;
 
-    public GameManagerScript gameManager;
+    public ScoreManagerScript scoreManager;
 
     public float meterIncreaseValue;
 
@@ -24,7 +24,7 @@ public class BulletScript : MonoBehaviour {
     void Start()
     {
         //I Adding a Game Manager function to this bullet
-        gameManager = GameObject.Find("UI").GetComponent<GameManagerScript>();
+        scoreManager = GameObject.Find("UI").GetComponent<ScoreManagerScript>();
     }
 
 
@@ -71,14 +71,14 @@ public class BulletScript : MonoBehaviour {
                 //Debug.Log("COLLIDED");
                 gameObject.SetActive(false);
                 col.gameObject.SetActive(false);
-                gameManager.GetComponent<GameManagerScript>().haremMeter.CurrentVal += meterIncreaseValue;
+                scoreManager.GetComponent<ScoreManagerScript>().haremMeter.CurrentVal += meterIncreaseValue;
             }
             if (col.gameObject.CompareTag("MaleNPC"))
             {
                 //Debug.Log("GAY METER INCREASED");
                 gameObject.SetActive(false);
                 col.gameObject.SetActive(false);
-                gameManager.GetComponent<GameManagerScript>().yaoiMeter.CurrentVal += meterIncreaseValue;
+                scoreManager.GetComponent<ScoreManagerScript>().yaoiMeter.CurrentVal += meterIncreaseValue;
             }
         }
         else if (bulletType == BulletType.HateBullet)
@@ -88,13 +88,13 @@ public class BulletScript : MonoBehaviour {
                 //Debug.Log("COLLIDED");
                 gameObject.SetActive(false);
                 col.gameObject.SetActive(false);
-                gameManager.GetComponent<GameManagerScript>().haremMeter.CurrentVal -= meterIncreaseValue;
+                scoreManager.GetComponent<ScoreManagerScript>().haremMeter.CurrentVal -= meterIncreaseValue;
             }
             if (col.gameObject.CompareTag("MaleNPC"))
             {
                 gameObject.SetActive(false);
                 col.gameObject.SetActive(false);
-                gameManager.GetComponent<GameManagerScript>().yaoiMeter.CurrentVal -= meterIncreaseValue;
+                scoreManager.GetComponent<ScoreManagerScript>().yaoiMeter.CurrentVal -= meterIncreaseValue;
             }
         }
     }

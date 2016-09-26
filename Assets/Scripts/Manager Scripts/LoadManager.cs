@@ -15,19 +15,18 @@ namespace Manager
 
         void Awake()
         {
-
             //I To create the object pooling manager
-           if (MainManager.instance == null)
+            if (GameManager.instance != null)
             {
                Instantiate(objPoolingManager);
             }
 
             //I To create the sound Manager
-            if (MainManager.instance == null)
+            if (GameManager.instance != null)
             {
                 Instantiate(soundManager);
             }
-            if (MainManager.instance == null)
+            if (GameManager.instance != null)
             {
                 Instantiate(spawnManager);
             }

@@ -3,20 +3,13 @@ using System.Collections;
 using UnityEngine.UI;
 
 
-public class ShootScript : MonoBehaviour {
+public class ChangeMode : MonoBehaviour {
 
     public Color newColor;
 
 
     public ShootingType shootType = ShootingType.LoveType;
     public Transform firePoint;
-
-
-    void Start()
-    {
-        
-    }
-
 
     public void ChangeToLove()
     {

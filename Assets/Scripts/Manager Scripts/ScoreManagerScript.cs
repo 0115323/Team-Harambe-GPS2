@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class GameManagerScript : MonoBehaviour {
+public class ScoreManagerScript : MonoBehaviour {
 
     public Stat haremMeter;
     public Stat yaoiMeter;

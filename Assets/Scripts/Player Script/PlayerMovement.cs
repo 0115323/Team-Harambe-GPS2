@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     public VirtualJoystick moveControl;
     public VirtualShootButton shootControl;
 
-    public ShootScript shooting;
+    public ChangeMode shooting;
 
     public bool fired;
 
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {
                         shotTimer -= Time.deltaTime;
                         if (shotTimer <= 0)
                         {
-                            if (shooting.GetComponent<ShootScript>().shootType == ShootingType.LoveType)
+                            if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
                             {
                                 //I This will reset the shot counter back to the full value of time between shots
                                 //I To instantiate at where the gun was point to.
@@ -98,7 +98,7 @@ public class PlayerMovement : MonoBehaviour {
                                 //I haremMeter.CurrentVal += 1;
 
                             }
-                            if (shooting.GetComponent<ShootScript>().shootType == ShootingType.HateType)
+                            if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
                             {
                                 //I This will reset the shot counter back to the full value of time between shots
                                 //I To instantiate at where the gun was point to.
