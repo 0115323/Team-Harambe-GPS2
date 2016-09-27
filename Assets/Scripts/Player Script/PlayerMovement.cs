@@ -16,13 +16,13 @@ public class PlayerMovement : MonoBehaviour {
     public VirtualShootButton shootControl;
 
     public ChangeMode shooting;
+	public ChangeMode currentGun;
 
     public bool fired;
 
     public float timeBetweenShots;
     private float shotTimer = 0f;
 
-    public GunType currentGun = GunType.Pistol;
 
 
 	// Use this for initialization
@@ -75,45 +75,115 @@ public class PlayerMovement : MonoBehaviour {
 
 
 
-            //I To detect the player how far the middle circle for the player have dragged and then the player shoot
-            if (shootControl.ShootInputDirection.magnitude >= 0.99f)
-            {
-                fired = true;
-                if (currentGun == GunType.Pistol)
-                {
-                    if (fired == true)
-                    {
-                        shotTimer -= Time.deltaTime;
-                        if (shotTimer <= 0)
-                        {
-                            if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
-                            {
-                                //I This will reset the shot counter back to the full value of time between shots
-                                //I To instantiate at where the gun was point to.
-                                //I This is part for the pooled object
-                                Invoke("FireLoveBullets",shotTimer);
-                                shotTimer = timeBetweenShots;
+			//I To detect the player how far the middle circle for the player have dragged and then the player shoot
+			if (shootControl.ShootInputDirection.magnitude >= 0.99f)
+			{
+				fired = true;
+				if (currentGun.GetComponent<ChangeMode>().gunType == GunType.Pistol)
+				{
+					timeBetweenShots = 0.5f;
+					if (fired == true)
+					{
+						shotTimer -= Time.deltaTime;
+						if (shotTimer <= 0)
+						{
+							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
+							{
+								//I This will reset the shot counter back to the full value of time between shots
+								//I To instantiate at where the gun was point to.
+								//I This is part for the pooled object
+								Invoke("FireLoveBullets",shotTimer);
+								shotTimer = timeBetweenShots;
 
-                                //I TESTING BAR SCRIPT
-                                //I haremMeter.CurrentVal += 1;
+								//I TESTING BAR SCRIPT
+								//I haremMeter.CurrentVal += 1;
 
-                            }
-                            if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
-                            {
-                                //I This will reset the shot counter back to the full value of time between shots
-                                //I To instantiate at where the gun was point to.
-                                //I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
-                                Invoke("FireHateBullets",shotTimer);
-                                shotTimer = timeBetweenShots;
+							}
+							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
+							{
+								//I This will reset the shot counter back to the full value of time between shots
+								//I To instantiate at where the gun was point to.
+								//I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
+								Invoke("FireHateBullets",shotTimer);
+								shotTimer = timeBetweenShots;
 
-                                //I TESTING BAR SCRIPT
-                                //I yaoiMeter.CurrentVal += 1;
-                            }                 
-                        }
-                    }
-                }
+								//I TESTING BAR SCRIPT
+								//I yaoiMeter.CurrentVal += 1;
+							}                 
+						}
+					}
+				}
+				//K this code is for the rifle
+				//K the rifle has a higher fire rate
+				else if(currentGun.GetComponent<ChangeMode>().gunType == GunType.Rifle)
+				{
+					timeBetweenShots = 0.1f;
+					if (fired == true)
+					{
+						shotTimer -= Time.deltaTime;
+						if (shotTimer <= 0)
+						{
+							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
+							{
+								Invoke("FireLoveBullets",shotTimer);
+								shotTimer = timeBetweenShots;
 
-            }
+							}
+							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
+							{
+								Invoke("FireHateBullets",shotTimer);
+								shotTimer = timeBetweenShots;
+
+							}                 
+						}
+					}
+				}
+				//K this code is used for the shotgun
+				//K done by Nass
+				else if(currentGun.GetComponent<ChangeMode>().gunType == GunType.Shotgun)
+				{
+					timeBetweenShots = 0.5f;
+					if (fired == true)
+					{
+						shotTimer -= Time.deltaTime;
+
+						if (shotTimer <= 0)
+						{
+
+							if (shooting.GetComponent<ChangeMode>().shootType  == ShootingType.LoveType)
+							{
+								Invoke("FireLoveBullets",shotTimer);
+								//Invoke("FireLoveBullets",shotTimer + 1f);
+								GameObject obj = ObjectPoolingManager.objPoolManager.GetLoveBulletsPooledObject ();
+
+
+								if (obj == null)
+									return;
+								obj.transform.position = shooting.firePoint.position + new Vector3 (Random.Range (-2f, 0f), 0, Random.Range (-2f, 0f));
+								obj.transform.rotation = shooting.firePoint.rotation;
+								obj.SetActive (true);
+								shotTimer = timeBetweenShots;
+
+							}
+							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
+							{
+								Invoke("FireHateBullets",shotTimer);
+								GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();
+
+
+								if (obj == null)
+									return;
+								obj.transform.position = shooting.firePoint.position + new Vector3(Random.Range(-2f,0f), 0, Random.Range(-2f,0f));
+								obj.transform.rotation = shooting.firePoint.rotation;
+								obj.SetActive (true);
+								shotTimer  = timeBetweenShots ;
+
+							}                 
+						}
+					}
+				}
+
+			}
         }
 
     }
