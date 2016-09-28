@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     public VirtualJoystick moveControl;
     public VirtualShootButton shootControl;
 
-    public ChangeMode shooting;
+
 	public ChangeMode currentGun;
 
     public bool fired;
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (shootControl.ShootInputDirection.magnitude >= 0.99f)
 			{
 				fired = true;
-				if (currentGun.GetComponent<ChangeMode>().gunType == GunType.Pistol)
+                if (currentGun.GetComponent<ChangeMode>().gunType == GunType.Pistol)
 				{
 					timeBetweenShots = 0.5f;
 					if (fired == true)
@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour {
 						shotTimer -= Time.deltaTime;
 						if (shotTimer <= 0)
 						{
-							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
+                            if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
 							{
 								//I This will reset the shot counter back to the full value of time between shots
 								//I To instantiate at where the gun was point to.
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour {
 								//I haremMeter.CurrentVal += 1;
 
 							}
-							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
+                            if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
 							{
 								//I This will reset the shot counter back to the full value of time between shots
 								//I To instantiate at where the gun was point to.
@@ -123,13 +123,13 @@ public class PlayerMovement : MonoBehaviour {
 						shotTimer -= Time.deltaTime;
 						if (shotTimer <= 0)
 						{
-							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
+                            if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
 							{
 								Invoke("FireLoveBullets",shotTimer);
 								shotTimer = timeBetweenShots;
 
 							}
-							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
+                            if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
 							{
 								Invoke("FireHateBullets",shotTimer);
 								shotTimer = timeBetweenShots;
@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour {
 						if (shotTimer <= 0)
 						{
 
-							if (shooting.GetComponent<ChangeMode>().shootType  == ShootingType.LoveType)
+                            if (currentGun.GetComponent<ChangeMode>().shootType  == ShootingType.LoveType)
 							{
 								Invoke("FireLoveBullets",shotTimer);
 								//Invoke("FireLoveBullets",shotTimer + 1f);
@@ -159,13 +159,13 @@ public class PlayerMovement : MonoBehaviour {
 
 								if (obj == null)
 									return;
-								obj.transform.position = shooting.firePoint.position + new Vector3 (Random.Range (-2f, 0f), 0, Random.Range (-2f, 0f));
-								obj.transform.rotation = shooting.firePoint.rotation;
-								obj.SetActive (true);
+                                obj.transform.position = currentGun.firePoint.position + new Vector3 (Random.Range (-2f, 0), 0, Random.Range (-2f, 0));
+                                obj.transform.rotation = currentGun.firePoint.rotation;
+                                obj.SetActive (true);
 								shotTimer = timeBetweenShots;
 
 							}
-							if (shooting.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
+                            if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
 							{
 								Invoke("FireHateBullets",shotTimer);
 								GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();
@@ -173,8 +173,8 @@ public class PlayerMovement : MonoBehaviour {
 
 								if (obj == null)
 									return;
-								obj.transform.position = shooting.firePoint.position + new Vector3(Random.Range(-2f,0f), 0, Random.Range(-2f,0f));
-								obj.transform.rotation = shooting.firePoint.rotation;
+                                obj.transform.position = currentGun.firePoint.position + new Vector3(Random.Range(-2f,0f), 0, Random.Range(-2f,0f));
+                                obj.transform.rotation = currentGun.firePoint.rotation;
 								obj.SetActive (true);
 								shotTimer  = timeBetweenShots ;
 
@@ -196,8 +196,8 @@ public class PlayerMovement : MonoBehaviour {
 
 
     if (obj == null) return;
-    obj.transform.position = shooting.firePoint.position;
-    obj.transform.rotation = shooting.firePoint.rotation;
+        obj.transform.position = currentGun.firePoint.position;
+        obj.transform.rotation = currentGun.firePoint.rotation;
     obj.SetActive(true);
     }
 
@@ -207,8 +207,8 @@ public class PlayerMovement : MonoBehaviour {
     GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();
 
     if (obj == null) return;
-    obj.transform.position = shooting.firePoint.position;
-    obj.transform.rotation = shooting.firePoint.rotation;
+        obj.transform.position = currentGun.firePoint.position;
+        obj.transform.rotation = currentGun.firePoint.rotation;
     obj.SetActive(true);
     }
 

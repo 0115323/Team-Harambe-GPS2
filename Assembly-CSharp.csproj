@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{9A11237F-ED63-616E-DBDE-C39399B84FC5}</ProjectGuid>
+    <ProjectGuid>{5DAA4F07-A039-B10D-672B-361497CAC395}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -48,7 +48,6 @@
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\Scripts\AI\NPCScript.cs" />
      <Compile Include="Assets\Scripts\AI\StalkerNavigation.cs" />
-     <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\Enums.cs" />
      <Compile Include="Assets\Scripts\Manager Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Manager Scripts\LoadManager.cs" />
