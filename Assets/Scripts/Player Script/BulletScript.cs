@@ -81,7 +81,7 @@ public class BulletScript : MonoBehaviour {
                 scoreManager.GetComponent<ScoreManagerScript>().yaoiMeter.CurrentVal += meterIncreaseValue;
             }
         }
-        else if (bulletType == BulletType.HateBullet)
+        if (bulletType == BulletType.HateBullet)
         {
             if (col.gameObject.CompareTag("FemaleNPC"))
             {

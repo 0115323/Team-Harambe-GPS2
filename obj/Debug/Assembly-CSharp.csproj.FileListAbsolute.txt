@@ -103,3 +103,45 @@ I:\Source\Temp\bin\Debug\UnityEngine.Networking.xml
 I:\Source\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 I:\Source\obj\Debug\Assembly-CSharp.dll
 I:\Source\obj\Debug\Assembly-CSharp.pdb
+I:\Github\Temp\bin\Debug\Assembly-CSharp.dll
+I:\Github\Temp\bin\Debug\Assembly-CSharp.pdb
+I:\Github\Temp\bin\Debug\UnityEditor.dll
+I:\Github\Temp\bin\Debug\UnityEngine.dll
+I:\Github\Temp\bin\Debug\UnityEngine.Networking.dll
+I:\Github\Temp\bin\Debug\UnityEngine.UI.dll
+I:\Github\Temp\bin\Debug\Mono.Cecil.dll
+I:\Github\Temp\bin\Debug\Unity.SerializationLogic.dll
+I:\Github\Temp\bin\Debug\Unity.DataContract.dll
+I:\Github\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+I:\Github\Temp\bin\Debug\Unity.UNetWeaver.dll
+I:\Github\Temp\bin\Debug\Unity.CecilTools.dll
+I:\Github\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+I:\Github\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+I:\Github\Temp\bin\Debug\UnityEngine.xml
+I:\Github\Temp\bin\Debug\UnityEditor.xml
+I:\Github\Temp\bin\Debug\UnityEngine.UI.xml
+I:\Github\Temp\bin\Debug\UnityEngine.Networking.xml
+I:\Github\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+I:\Github\obj\Debug\Assembly-CSharp.dll
+I:\Github\obj\Debug\Assembly-CSharp.pdb
+I:\Projects Backup\Temp\bin\Debug\Assembly-CSharp.dll
+I:\Projects Backup\Temp\bin\Debug\Assembly-CSharp.pdb
+I:\Projects Backup\Temp\bin\Debug\UnityEditor.dll
+I:\Projects Backup\Temp\bin\Debug\UnityEngine.dll
+I:\Projects Backup\Temp\bin\Debug\UnityEngine.Networking.dll
+I:\Projects Backup\Temp\bin\Debug\UnityEngine.UI.dll
+I:\Projects Backup\Temp\bin\Debug\Mono.Cecil.dll
+I:\Projects Backup\Temp\bin\Debug\Unity.SerializationLogic.dll
+I:\Projects Backup\Temp\bin\Debug\Unity.DataContract.dll
+I:\Projects Backup\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+I:\Projects Backup\Temp\bin\Debug\Unity.UNetWeaver.dll
+I:\Projects Backup\Temp\bin\Debug\Unity.CecilTools.dll
+I:\Projects Backup\Temp\bin\Debug\Mono.Cecil.Pdb.dll
+I:\Projects Backup\Temp\bin\Debug\Mono.Cecil.Mdb.dll
+I:\Projects Backup\Temp\bin\Debug\UnityEngine.xml
+I:\Projects Backup\Temp\bin\Debug\UnityEditor.xml
+I:\Projects Backup\Temp\bin\Debug\UnityEngine.UI.xml
+I:\Projects Backup\Temp\bin\Debug\UnityEngine.Networking.xml
+I:\Projects Backup\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
+I:\Projects Backup\obj\Debug\Assembly-CSharp.dll
+I:\Projects Backup\obj\Debug\Assembly-CSharp.pdb

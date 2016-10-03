@@ -25,8 +25,8 @@ public class SpawnManager : MonoBehaviour {
         //IDebug.Log(spawnPoints.Length);
 
 
-        InvokeRepeating("SpawnFemaleNPC", spawnTime, spawnTime);
-        InvokeRepeating("SpawnMaleNPC", spawnTime, spawnTime);
+        InvokeRepeating("SpawnFemaleNPC", 0, spawnTime);
+        InvokeRepeating("SpawnMaleNPC", 0, spawnTime);
 	}
 	
     void SpawnFemaleNPC()
@@ -55,4 +55,7 @@ public class SpawnManager : MonoBehaviour {
         npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
         npcOBJ.SetActive(true);
     }
+
+
+
 }

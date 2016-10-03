@@ -13,8 +13,8 @@ public class ObjectPoolingManager : MonoBehaviour {
     List<GameObject> hateBulletsList;
 
 
-    private int maxPooledLoveBullets = 5;
-    private int maxPooledHateBullets = 5;
+    private int maxPooledLoveBullets = 3;
+    private int maxPooledHateBullets = 3;
 
 
     public GameObject loveBullet;
@@ -30,10 +30,13 @@ public class ObjectPoolingManager : MonoBehaviour {
     public GameObject maleNPCType1;
     //I ============== END OF THE NPC POOL OBJECT =================
 
+    public int maxFemaleNPCPooling = 0;
+    public int maxMaleNPCPooling = 0;
+
 
     //I All THIS SCRIPT WILL BE COMMENTED LATER ON. STILL WATCHING THE TUTORIAL TO UNDERSTAND HOW THE CODE REALLY WORKS.
 
-    void Awake()
+    void Start()
     {
         
         objPoolManager = this;
@@ -137,12 +140,16 @@ public class ObjectPoolingManager : MonoBehaviour {
                 return femaleNPCList[i];
             }
         }
-
-        if (willGrow)
+        if (maxFemaleNPCPooling <= 3)
         {
-            GameObject obj = (GameObject)Instantiate(femaleNPCType1);
-            femaleNPCList.Add(obj);
-            return obj;
+            maxFemaleNPCPooling++;
+            GameObject femaleobj = (GameObject)Instantiate(femaleNPCType1);
+            femaleNPCList.Add(femaleobj);
+            Debug.Log(maxFemaleNPCPooling);
+            if (maxFemaleNPCPooling >= 3)
+            {
+                return null;
+            }
         }
 
         return null;
@@ -157,17 +164,19 @@ public class ObjectPoolingManager : MonoBehaviour {
                 return maleNPCList[i];
             }
         }
-
-        if (willGrow)
+        if (maxMaleNPCPooling <= 3)
         {
-            GameObject obj = (GameObject)Instantiate(maleNPCType1);
-            maleNPCList.Add(obj);
-            return obj;
+            maxMaleNPCPooling++;
+            GameObject maleobj = (GameObject)Instantiate(maleNPCType1);
+            maleNPCList.Add(maleobj);
+            if (maxMaleNPCPooling >= 3)
+            {
+                return null;
+            }
         }
+
 
         return null;
     }
-
-    //I ============== END OF THE SPAWN MANAGER ===================
 
 }

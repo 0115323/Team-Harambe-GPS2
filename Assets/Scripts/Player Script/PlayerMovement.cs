@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 	
 
-	void FixedUpdate () 
+	void Update () 
     {
         myRigidBody.velocity = moveVelocity;
 
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
 			//I To detect the player how far the middle circle for the player have dragged and then the player shoot
-			if (shootControl.ShootInputDirection.magnitude >= 0.99f)
+			if (shootControl.ShootInputDirection.magnitude >= 0.90f)
 			{
 				fired = true;
                 if (currentGun.GetComponent<ChangeMode>().gunType == GunType.Pistol)
@@ -95,9 +95,6 @@ public class PlayerMovement : MonoBehaviour {
 								Invoke("FireLoveBullets",shotTimer);
 								shotTimer = timeBetweenShots;
 
-								//I TESTING BAR SCRIPT
-								//I haremMeter.CurrentVal += 1;
-
 							}
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
 							{
@@ -106,9 +103,6 @@ public class PlayerMovement : MonoBehaviour {
 								//I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
 								Invoke("FireHateBullets",shotTimer);
 								shotTimer = timeBetweenShots;
-
-								//I TESTING BAR SCRIPT
-								//I yaoiMeter.CurrentVal += 1;
 							}                 
 						}
 					}
@@ -149,36 +143,17 @@ public class PlayerMovement : MonoBehaviour {
 
 						if (shotTimer <= 0)
 						{
+                            if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
+                            {
+                                Invoke("ShotgunFireLoveBullets", shotTimer);
+                                shotTimer = timeBetweenShots;
 
-                            if (currentGun.GetComponent<ChangeMode>().shootType  == ShootingType.LoveType)
-							{
-								Invoke("FireLoveBullets",shotTimer);
-								//Invoke("FireLoveBullets",shotTimer + 1f);
-								GameObject obj = ObjectPoolingManager.objPoolManager.GetLoveBulletsPooledObject ();
-
-
-								if (obj == null)
-									return;
-                                obj.transform.position = currentGun.firePoint.position + new Vector3 (Random.Range (-2f, 0), 0, Random.Range (-2f, 0));
-                                obj.transform.rotation = currentGun.firePoint.rotation;
-                                obj.SetActive (true);
-								shotTimer = timeBetweenShots;
-
-							}
+                            }
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
-							{
-								Invoke("FireHateBullets",shotTimer);
-								GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();
-
-
-								if (obj == null)
-									return;
-                                obj.transform.position = currentGun.firePoint.position + new Vector3(Random.Range(-2f,0f), 0, Random.Range(-2f,0f));
-                                obj.transform.rotation = currentGun.firePoint.rotation;
-								obj.SetActive (true);
-								shotTimer  = timeBetweenShots ;
-
-							}                 
+                            {
+                                Invoke("ShotgunFireHateBullets",shotTimer);
+                                shotTimer = timeBetweenShots;
+                            }    
 						}
 					}
 				}
@@ -196,8 +171,8 @@ public class PlayerMovement : MonoBehaviour {
 
 
     if (obj == null) return;
-        obj.transform.position = currentGun.firePoint.position;
-        obj.transform.rotation = currentGun.firePoint.rotation;
+    obj.transform.position = currentGun.firePoint.position;
+    obj.transform.rotation = currentGun.firePoint.rotation;
     obj.SetActive(true);
     }
 
@@ -207,18 +182,34 @@ public class PlayerMovement : MonoBehaviour {
     GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();
 
     if (obj == null) return;
-        obj.transform.position = currentGun.firePoint.position;
-        obj.transform.rotation = currentGun.firePoint.rotation;
+    obj.transform.position = currentGun.firePoint.position;
+    obj.transform.rotation = currentGun.firePoint.rotation;
     obj.SetActive(true);
     }
 
-    void OnCollisionEnter (Collision col)
-    {
-        if(col.gameObject.CompareTag("Building"))
-            {
-               // Debug.Log("Collided");
-            }
 
+    void ShotgunFireLoveBullets()
+    {
+        for(int i =0; i<= 6; i++)
+        {
+            GameObject obj = ObjectPoolingManager.objPoolManager.GetLoveBulletsPooledObject();
+
+            obj.transform.position = currentGun.firePoint.position;
+            obj.transform.rotation = currentGun.firePoint.rotation * Quaternion.AngleAxis(Random.value * 15f, transform.up);
+            obj.SetActive(true);
+        }
+    }
+
+    void ShotgunFireHateBullets()
+    {
+        for(int i =0; i<= 6; i++)
+        {
+            GameObject obj = ObjectPoolingManager.objPoolManager.GetHateBulletsPooledObject();
+
+            obj.transform.position = currentGun.firePoint.position;
+            obj.transform.rotation = currentGun.firePoint.rotation * Quaternion.AngleAxis(Random.value * 15f, transform.up);
+            obj.SetActive(true);
+        }
     }
 
 }
