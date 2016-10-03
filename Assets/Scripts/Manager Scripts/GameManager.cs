@@ -8,8 +8,7 @@ public static GameManager instance;
 
 public GameObject loader;
 
-    public bool TestingMode;
-
+    public bool testingMode;
 
 void Awake()
 {
@@ -27,24 +26,25 @@ void Awake()
 
     void Update()
     {
-        if (TestingMode)
+        if (testingMode)
         {
             int fingerCount = 0;
-
-            string sceneName = SceneManager.GetActiveScene().name;
+            Scene sceneName = SceneManager.GetActiveScene();
 
             foreach (Touch touch in Input.touches)
             {
                 if (touch.phase != TouchPhase.Ended && touch.phase != TouchPhase.Canceled)
+                {
                     fingerCount++;
+                }
+
             }
             if (fingerCount >= 5)
             {
-                Debug.Log("Finger count : " + fingerCount);
-                SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+                Debug.Log("Reloading");
+                SceneManager.LoadScene(sceneName.name);
             }
         }
-
     }
 
 
