@@ -33,6 +33,10 @@ public class ConeOfVision : MonoBehaviour
         if(see)
         {
             GetComponent<NavMeshAgent>().destination = player.position;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25c1e67c1f1d3153cb85d655aa1219a334dd72fa
         }
     }
 
@@ -41,12 +45,21 @@ public class ConeOfVision : MonoBehaviour
 	void FindVisibleTargets()
 	{
 		visibleTargets.Clear ();
+<<<<<<< HEAD
 		Collider[] targetInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
 
 
         for(int i=0;i< targetInViewRadius.Length; i++)
 		{
             Transform target = targetInViewRadius[i] .transform;
+=======
+		Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
+
+
+		for(int i=0;i< targetsInViewRadius.Length; i++)
+		{
+			Transform target = targetsInViewRadius [i].transform;
+>>>>>>> 25c1e67c1f1d3153cb85d655aa1219a334dd72fa
 			Vector3 dirToTarget = (target.position - transform.position).normalized;
 			if (Vector3.Angle (transform.forward, dirToTarget) < viewAngle / 2) 
 			{
@@ -56,6 +69,10 @@ public class ConeOfVision : MonoBehaviour
 
 				if (!Physics.Raycast (transform.position, dirToTarget, distToTarget, wallMask)) 
 				{
+<<<<<<< HEAD
+=======
+					visibleTargets.Add (target);
+>>>>>>> 25c1e67c1f1d3153cb85d655aa1219a334dd72fa
                     see = true;
 				}
 
