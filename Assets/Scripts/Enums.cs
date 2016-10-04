@@ -38,23 +38,24 @@ public enum StalkerBehaviour
 public enum NPCBehaviour
 {
     Normal,
-    Running,
-    Wary
+    Running
 }
 //I =================== END OF NPC BEHAVIOUR ==============================
 
 
 //I ================== NPC SPAWNING ENUM =================================
-public enum NPCSpawnState
+public enum NPCGender
 {
-    Spawning,
-    Waiting
+    Female,
+    Male
 }
 //I ================== END OF SPAWNING ENUM =============================
 
 //I ================== Holstering State ================================
+/* //I Holstering is now nice to have, when we have time, we will do it.
 public enum Holstering
 {
     Draw,
     Withdraw
-}
+}*/
+//I ================ END OF THE HOLSTERING STATE ======================

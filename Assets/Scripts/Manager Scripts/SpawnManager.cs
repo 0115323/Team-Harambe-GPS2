@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class SpawnManager : MonoBehaviour {
+public class SpawnManager : MonoBehaviour 
+{
     //I Work in progress. Will be fully implemented
 
 
     public float spawnTime;
 
     public Transform[] spawnPoints;
+
+    public GameObject[] maleNPC;
+    public GameObject[] femaleNPC;
 
 	void Start () 
     {
@@ -25,12 +29,15 @@ public class SpawnManager : MonoBehaviour {
         //IDebug.Log(spawnPoints.Length);
 
 
-        InvokeRepeating("SpawnFemaleNPC", 0, spawnTime);
-        InvokeRepeating("SpawnMaleNPC", 0, spawnTime);
+        InvokeRepeating("SpawnFemaleNPC", 0, 3);
+        InvokeRepeating("SpawnMaleNPC", 0, 4);
 	}
 	
     void SpawnFemaleNPC()
     {
+        femaleNPC = GameObject.FindGameObjectsWithTag("FemaleNPC");
+
+
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
         GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetFemaleNPCType1();
@@ -43,8 +50,11 @@ public class SpawnManager : MonoBehaviour {
     }
 
 
+
     void SpawnMaleNPC()
     {
+        maleNPC = GameObject.FindGameObjectsWithTag("MaleNPC");
+
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
         GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetMaleNPCType1();
