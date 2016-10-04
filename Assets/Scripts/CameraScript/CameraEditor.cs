@@ -1,9 +1,6 @@
-﻿#if UNITY_EDITOR
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-
 
 [CustomEditor (typeof (CameraScript))]
 public class CameraEditor : Editor {
@@ -15,5 +12,3 @@ public class CameraEditor : Editor {
     }
 
 }
-
-#endif

@@ -1,6 +1,4 @@
-﻿
-#if UNITY_EDITOR
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class FPSDisplay : MonoBehaviour
@@ -28,4 +26,3 @@ public class FPSDisplay : MonoBehaviour
         GUI.Label(rect, text, style);
     }
 }
-#endif

@@ -41,6 +41,7 @@ void Awake()
             }
             if (fingerCount >= 5)
             {
+                Debug.Log("Reloading");
                 SceneManager.LoadScene(sceneName.name);
             }
         }

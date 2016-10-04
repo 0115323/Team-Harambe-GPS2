@@ -47,10 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\Scripts\AI\ConeOfVision.cs" />
-     <Compile Include="Assets\Scripts\AI\FemaleNPCScript.cs" />
-     <Compile Include="Assets\Scripts\AI\IDamageable.cs" />
-     <Compile Include="Assets\Scripts\AI\MaleNPCScript.cs" />
-     <Compile Include="Assets\Scripts\AI\NPC.cs" />
+     <Compile Include="Assets\Scripts\AI\NPCScript.cs" />
      <Compile Include="Assets\Scripts\AI\Stalker_Waypoint.cs" />
      <Compile Include="Assets\Scripts\AI\VisionConeEditor.cs" />
      <Compile Include="Assets\Scripts\AI\Waypoint_patrol.cs" />

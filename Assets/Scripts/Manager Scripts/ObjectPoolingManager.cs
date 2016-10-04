@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 
 
-public class ObjectPoolingManager : MonoBehaviour 
-{
+public class ObjectPoolingManager : MonoBehaviour {
 
     public static ObjectPoolingManager objPoolManager;
 
@@ -48,7 +47,6 @@ public class ObjectPoolingManager : MonoBehaviour
         for (int i = 0; i < maxPooledLoveBullets; i++)
         {
             GameObject obj = (GameObject)Instantiate(loveBullet);
-            obj.transform.parent = transform;
             obj.SetActive(false);
             loveBulletsList.Add(obj);
         }
@@ -60,7 +58,6 @@ public class ObjectPoolingManager : MonoBehaviour
         for (int i = 0; i < maxPooledHateBullets; i++)
         {
             GameObject obj = (GameObject)Instantiate(hateBullet);
-            obj.transform.parent = transform;
             obj.SetActive(false);
             hateBulletsList.Add(obj);
         }
@@ -69,7 +66,6 @@ public class ObjectPoolingManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             GameObject obj = (GameObject)Instantiate(femaleNPCType1);
-            obj.transform.parent = transform;
             obj.SetActive(false);
             femaleNPCList.Add(obj);
         }
@@ -81,7 +77,6 @@ public class ObjectPoolingManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             GameObject obj = (GameObject)Instantiate(maleNPCType1);
-            obj.transform.parent = transform;
             obj.SetActive(false);
             maleNPCList.Add(obj);
         }
@@ -103,7 +98,6 @@ public class ObjectPoolingManager : MonoBehaviour
         if (willGrow)
         {
             GameObject obj = (GameObject)Instantiate(loveBullet);
-            obj.transform.parent = transform;
             loveBulletsList.Add(obj);
             return obj;
         }
@@ -125,7 +119,6 @@ public class ObjectPoolingManager : MonoBehaviour
         if (willGrow)
         {
             GameObject obj = (GameObject)Instantiate(hateBullet);
-            obj.transform.parent = transform;
             hateBulletsList.Add(obj);
             return obj;
         }
@@ -147,18 +140,18 @@ public class ObjectPoolingManager : MonoBehaviour
                 return femaleNPCList[i];
             }
         }
-        if (maxFemaleNPCPooling < 3)
+        if (maxFemaleNPCPooling <= 3)
         {
             maxFemaleNPCPooling++;
             GameObject femaleobj = (GameObject)Instantiate(femaleNPCType1);
-            femaleobj.transform.parent = transform;
             femaleNPCList.Add(femaleobj);
-            //Debug.Log(maxFemaleNPCPooling);
-            if (maxFemaleNPCPooling > 3)
+            Debug.Log(maxFemaleNPCPooling);
+            if (maxFemaleNPCPooling >= 3)
             {
                 return null;
             }
         }
+
         return null;
     }
 
@@ -171,17 +164,19 @@ public class ObjectPoolingManager : MonoBehaviour
                 return maleNPCList[i];
             }
         }
-        if (maxMaleNPCPooling < 3)
+        if (maxMaleNPCPooling <= 3)
         {
             maxMaleNPCPooling++;
             GameObject maleobj = (GameObject)Instantiate(maleNPCType1);
-            maleobj.transform.parent = transform;
             maleNPCList.Add(maleobj);
-            if (maxMaleNPCPooling > 3)
+            if (maxMaleNPCPooling >= 3)
             {
                 return null;
             }
         }
+
+
         return null;
     }
+
 }

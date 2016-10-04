@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 
 
 public class CameraScript : MonoBehaviour {
@@ -46,6 +45,7 @@ public class CameraScript : MonoBehaviour {
         _hideObjects = new List<Transform>();
         _showOutsideObjects = new List<Transform>();
         InvokeRepeating("renderObjects", 0.0f, renderTime);
+
 	}
 
 
@@ -55,10 +55,11 @@ public class CameraScript : MonoBehaviour {
         //I This is just a simple code to simply make the camera follow the player.
         PlayerPOS = GameObject.FindGameObjectWithTag("Player").transform.transform.position;
         GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+25, PlayerPOS.z-21);
+
 	}
 
 
-    private void transparentObjects()
+    void transparentObjects()
     {
         direction = player.position - cameraObject.position;
 
@@ -85,7 +86,6 @@ public class CameraScript : MonoBehaviour {
                 //I --- WORK IN PROGRESS TO ACHIEVE THE TRANSPARENCY ---------
                 _hideObjects.Add(currentHit);
                 currentHit.GetComponent<Renderer>().enabled = false;
-
             }
         }
 
@@ -118,7 +118,7 @@ public class CameraScript : MonoBehaviour {
     }
 
     //I To render objects when the player is near it
-    private void renderObjects()
+    void renderObjects()
     {
         //I Creating an array of collider and converting it into physics spehere type
         Collider[] objectsToRender = Physics.OverlapSphere (player.transform.position, renderRadius, layerMask);
@@ -162,6 +162,5 @@ public class CameraScript : MonoBehaviour {
         }
 
     }
-
 
 }

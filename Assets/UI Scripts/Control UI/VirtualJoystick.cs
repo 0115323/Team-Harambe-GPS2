@@ -10,7 +10,6 @@ using System.Collections;
 
 public class VirtualJoystick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDownHandler
 {
-
     private Image joystickBG;
     private Image joystickImage;
 

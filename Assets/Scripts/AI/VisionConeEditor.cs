@@ -1,9 +1,6 @@
-﻿#if UNITY_EDITOR
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
-
 
 //D Declaring a scustom editor
 [CustomEditor (typeof (ConeOfVision))]
@@ -33,4 +30,3 @@ public class VisionConeEditor : Editor
 	}
 
 }
-#endif

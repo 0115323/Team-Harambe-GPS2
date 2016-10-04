@@ -2,24 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
-
-
-
-public class PlayerMovement : MonoBehaviour
-{
-
+public class PlayerMovement : MonoBehaviour {
 
     public float movementSpeed;
     private Rigidbody myRigidBody;
 
-    private Vector3 moveInput;
-    private Vector3 moveVelocity;
+    public Vector3 moveInput;
+    public Vector3 moveVelocity;
 
     private Camera mainCamera;
 
-    private VirtualJoystick moveControl;
-    private VirtualShootButton shootControl;
+    public VirtualJoystick moveControl;
+    public VirtualShootButton shootControl;
 
 
 	public ChangeMode currentGun;
@@ -55,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
         fired = false;
 
         //I We want to get a specific control and using a z value to move the player. If using a y value, it will move the player up to the sky.
-        //I Uncomment this when want to test on PC.
         moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         moveVelocity = moveInput*movementSpeed;
 
