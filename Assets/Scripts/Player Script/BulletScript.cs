@@ -62,7 +62,7 @@ public class BulletScript : MonoBehaviour {
             if (damageableObject != null)
             {
                 this.gameObject.SetActive(false);
-                damageableObject.hateTakeHit(damage,col);
+                damageableObject.hateTakeHit(damage, col);
             }
             //I If the damageableobject is null, for example, walls or other type of non damageobject, it is time to disable the bullet and put it back into the object pool manager
             //I to avoid of creating or requesting lots of bullet to shoot
@@ -71,7 +71,9 @@ public class BulletScript : MonoBehaviour {
                 this.gameObject.SetActive(false);
             }
         }
-
-
+        if(damageableObject == null)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

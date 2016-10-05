@@ -26,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
 	public ChangeMode currentGun;
 
 
-    public BulletScript bullet;
-
     public float timeBetweenShots;
     float shotTimer = 0f;
 
