@@ -42,8 +42,7 @@ public class SpawnManager : MonoBehaviour
 
         GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetFemaleNPCType1();
 
-        if (npcOBJ == null)
-            return;
+        if (npcOBJ == null)return;
         npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
         npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
         npcOBJ.SetActive(true);
@@ -59,13 +58,9 @@ public class SpawnManager : MonoBehaviour
 
         GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetMaleNPCType1();
 
-        if (npcOBJ == null)
-            return;
+        if (npcOBJ == null)return;
         npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
         npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
         npcOBJ.SetActive(true);
     }
-
-
-
 }

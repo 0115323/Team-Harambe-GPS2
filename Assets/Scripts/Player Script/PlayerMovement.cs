@@ -22,13 +22,16 @@ public class PlayerMovement : MonoBehaviour
     private VirtualShootButton shootControl;
 
 
+
 	public ChangeMode currentGun;
 
-    public bool fired;
+
+    public BulletScript bullet;
 
     public float timeBetweenShots;
-    private float shotTimer = 0f;
+    float shotTimer = 0f;
 
+    bool fired;
 
 
 	// Use this for initialization
@@ -40,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
         //I Register the shoot control on start on the player
         shootControl = GameObject.Find("UI").GetComponentInChildren<VirtualShootButton>();
 
-
         myRigidBody = GetComponent<Rigidbody>();
         //I To find the reference to the camera
         mainCamera = FindObjectOfType<Camera>();
@@ -50,16 +52,18 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update () 
     {
+
+
         myRigidBody.velocity = moveVelocity;
 
         fired = false;
 
         //I We want to get a specific control and using a z value to move the player. If using a y value, it will move the player up to the sky.
         //I Uncomment this when want to test on PC.
-        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        moveVelocity = moveInput*movementSpeed;
+        //moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        moveVelocity = moveControl.InputDirection*movementSpeed;
 
-        Vector3 targetDirection = new Vector3(moveControl.InputDirection.x, moveControl.InputDirection.y);
+        //Vector3 targetDirection = new Vector3(moveControl.InputDirection.x, moveControl.InputDirection.y);
 
         //float rayLength;
         //I This code is for the overwrite the above code from using W,A,S,D key instead using the virtual joystick.
@@ -82,74 +86,74 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-			//I To detect the player how far the middle circle for the player have dragged and then the player shoot
-			if (shootControl.ShootInputDirection.magnitude >= 0.90f)
-			{
-				fired = true;
+            //I To detect the player how far the middle circle for the player have dragged and then the player shoot
+            if (shootControl.ShootInputDirection.magnitude >= 0.90f)
+            {
+                fired = true;
                 if (currentGun.GetComponent<ChangeMode>().gunType == GunType.Pistol)
-				{
-					timeBetweenShots = 0.5f;
-					if (fired == true)
-					{
-						shotTimer -= Time.deltaTime;
-						if (shotTimer <= 0)
-						{
+                {
+                    timeBetweenShots = 0.5f;
+                    if (fired == true)
+                    {
+                        shotTimer -= Time.deltaTime;
+                        if (shotTimer <= 0)
+                        {
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
-							{
-								//I This will reset the shot counter back to the full value of time between shots
-								//I To instantiate at where the gun was point to.
-								//I This is part for the pooled object
-								Invoke("FireLoveBullets",shotTimer);
-								shotTimer = timeBetweenShots;
+                            {
+                                //I This will reset the shot counter back to the full value of time between shots
+                                //I To instantiate at where the gun was point to.
+                                //I This is part for the pooled object
+                                Invoke("FireLoveBullets", shotTimer);
+                                shotTimer = timeBetweenShots;
 
-							}
+                            }
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
-							{
-								//I This will reset the shot counter back to the full value of time between shots
-								//I To instantiate at where the gun was point to.
-								//I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
-								Invoke("FireHateBullets",shotTimer);
-								shotTimer = timeBetweenShots;
-							}                 
-						}
-					}
-				}
+                            {
+                                //I This will reset the shot counter back to the full value of time between shots
+                                //I To instantiate at where the gun was point to.
+                                //I BulletScript newBullet = Instantiate(hateBullet, shooting.firePoint.position, shooting.firePoint.rotation) as BulletScript;
+                                Invoke("FireHateBullets", shotTimer);
+                                shotTimer = timeBetweenShots;
+                            }                 
+                        }
+                    }
+                }
 				//K this code is for the rifle
 				//K the rifle has a higher fire rate
-				else if(currentGun.GetComponent<ChangeMode>().gunType == GunType.Rifle)
-				{
-					timeBetweenShots = 0.1f;
-					if (fired == true)
-					{
-						shotTimer -= Time.deltaTime;
-						if (shotTimer <= 0)
-						{
+				else if (currentGun.GetComponent<ChangeMode>().gunType == GunType.Rifle)
+                {
+                    timeBetweenShots = 0.1f;
+                    if (fired == true)
+                    {
+                        shotTimer -= Time.deltaTime;
+                        if (shotTimer <= 0)
+                        {
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
-							{
-								Invoke("FireLoveBullets",shotTimer);
-								shotTimer = timeBetweenShots;
+                            {
+                                Invoke("FireLoveBullets", shotTimer);
+                                shotTimer = timeBetweenShots;
 
-							}
+                            }
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
-							{
-								Invoke("FireHateBullets",shotTimer);
-								shotTimer = timeBetweenShots;
+                            {
+                                Invoke("FireHateBullets", shotTimer);
+                                shotTimer = timeBetweenShots;
 
-							}                 
-						}
-					}
-				}
+                            }                 
+                        }
+                    }
+                }
 				//K this code is used for the shotgun
 				//K done by Nass
-				else if(currentGun.GetComponent<ChangeMode>().gunType == GunType.Shotgun)
-				{
-					timeBetweenShots = 0.5f;
-					if (fired == true)
-					{
-						shotTimer -= Time.deltaTime;
+				else if (currentGun.GetComponent<ChangeMode>().gunType == GunType.Shotgun)
+                {
+                    timeBetweenShots = 0.5f;
+                    if (fired == true)
+                    {
+                        shotTimer -= Time.deltaTime;
 
-						if (shotTimer <= 0)
-						{
+                        if (shotTimer <= 0)
+                        {
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.LoveType)
                             {
                                 Invoke("ShotgunFireLoveBullets", shotTimer);
@@ -158,16 +162,23 @@ public class PlayerMovement : MonoBehaviour
                             }
                             if (currentGun.GetComponent<ChangeMode>().shootType == ShootingType.HateType)
                             {
-                                Invoke("ShotgunFireHateBullets",shotTimer);
+                                Invoke("ShotgunFireHateBullets", shotTimer);
                                 shotTimer = timeBetweenShots;
                             }    
-						}
-					}
-				}
+                        }
+                    }
+                }
 
-			}
+            }
+            else
+            {
+                return;
+            }
         }
-
+        else
+        {
+            return;
+        }
     }
 
     //I To fire the love bullets

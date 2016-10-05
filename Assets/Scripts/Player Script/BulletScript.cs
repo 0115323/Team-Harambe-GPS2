@@ -7,10 +7,12 @@ using System.Collections;
 public class BulletScript : MonoBehaviour {
 
     public float speed;
-    public int damage = 1;
+    protected int damage = 1;
+    public int totalDamage = 1;
 
     public BulletType bulletType = BulletType.LoveBullet;
 
+    public TrailRenderer trailrender;
 
     void Update()
     {
@@ -30,6 +32,7 @@ public class BulletScript : MonoBehaviour {
 
     void OnDisable()
     {
+        trailrender.Clear();
         CancelInvoke();
     }
 
@@ -46,6 +49,12 @@ public class BulletScript : MonoBehaviour {
                 //I Apply the damage from this bullet would cause toward the object it collided with
                 damageableObject.loveTakeHit(damage, col);
             }
+            //I If the damageableobject is null, for example, walls or other type of non damageobject, it is time to disable the bullet and put it back into the object pool manager
+            //I to avoid of creating or requesting lots of bullet to shoot
+            else
+            {
+                this.gameObject.SetActive(false);
+            }
         }
 
         if (bulletType == BulletType.HateBullet)
@@ -55,12 +64,14 @@ public class BulletScript : MonoBehaviour {
                 this.gameObject.SetActive(false);
                 damageableObject.hateTakeHit(damage,col);
             }
+            //I If the damageableobject is null, for example, walls or other type of non damageobject, it is time to disable the bullet and put it back into the object pool manager
+            //I to avoid of creating or requesting lots of bullet to shoot
+            else
+            {
+                this.gameObject.SetActive(false);
+            }
         }
 
-        //I If the damageableobject is null, for example, walls or other type of non damageobject, it is time to disable the bullet and put it back into the object pool manager
-        else
-        {
-            this.gameObject.SetActive(false);
-        }
+
     }
 }

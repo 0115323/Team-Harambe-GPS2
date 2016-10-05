@@ -31,8 +31,13 @@ public class ObjectPoolingManager : MonoBehaviour
     public GameObject maleNPCType1;
     //I ============== END OF THE NPC POOL OBJECT =================
 
-    public int maxFemaleNPCPooling = 0;
-    public int maxMaleNPCPooling = 0;
+    private int FemaleNPCPooling = 0;
+    private int MaleNPCPooling = 0;
+
+    [SerializeField]
+    private int maxFemaleNPCPooling = 0;
+    [SerializeField]
+    private int maxMaleNPCPooling = 0;
 
 
     //I All THIS SCRIPT WILL BE COMMENTED LATER ON. STILL WATCHING THE TUTORIAL TO UNDERSTAND HOW THE CODE REALLY WORKS.
@@ -147,14 +152,14 @@ public class ObjectPoolingManager : MonoBehaviour
                 return femaleNPCList[i];
             }
         }
-        if (maxFemaleNPCPooling < 3)
+        if (FemaleNPCPooling < maxFemaleNPCPooling)
         {
-            maxFemaleNPCPooling++;
+            FemaleNPCPooling++;
             GameObject femaleobj = (GameObject)Instantiate(femaleNPCType1);
             femaleobj.transform.parent = transform;
             femaleNPCList.Add(femaleobj);
             //Debug.Log(maxFemaleNPCPooling);
-            if (maxFemaleNPCPooling > 3)
+            if (FemaleNPCPooling > maxFemaleNPCPooling)
             {
                 return null;
             }
@@ -171,13 +176,13 @@ public class ObjectPoolingManager : MonoBehaviour
                 return maleNPCList[i];
             }
         }
-        if (maxMaleNPCPooling < 3)
+        if (MaleNPCPooling < maxMaleNPCPooling)
         {
-            maxMaleNPCPooling++;
+            MaleNPCPooling++;
             GameObject maleobj = (GameObject)Instantiate(maleNPCType1);
             maleobj.transform.parent = transform;
             maleNPCList.Add(maleobj);
-            if (maxMaleNPCPooling > 3)
+            if (MaleNPCPooling > maxMaleNPCPooling)
             {
                 return null;
             }

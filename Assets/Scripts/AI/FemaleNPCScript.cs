@@ -11,7 +11,6 @@ public class FemaleNPCScript : NPC
     public override void OnEnable () 
     {
         //I Get called onenable function and everytime the object is enabled, reset the health to full
-
         base.OnEnable();
 	}
 
@@ -26,7 +25,6 @@ public class FemaleNPCScript : NPC
             Destroy(Instantiate(loveParticle.gameObject, gameObject.transform.position, Quaternion.FromToRotation(Vector3.forward,Vector3.up)) as GameObject, loveParticle.startLifetime);
         }
         //I Access the member of the class from within the derived class
-
         base.loveTakeHit(damage, col);
     }
 

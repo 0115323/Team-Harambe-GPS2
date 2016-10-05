@@ -54,7 +54,7 @@ public class CameraScript : MonoBehaviour {
         transparentObjects();
         //I This is just a simple code to simply make the camera follow the player.
         PlayerPOS = GameObject.FindGameObjectWithTag("Player").transform.transform.position;
-        GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+25, PlayerPOS.z-21);
+        GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+31, PlayerPOS.z-30);
 	}
 
 
