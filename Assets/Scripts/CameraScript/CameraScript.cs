@@ -24,18 +24,24 @@ public class CameraScript : MonoBehaviour {
     public GameObject[] objectToHide;
 
     public float renderTime;
-
     void Awake()
     {
+
         objectToHide = GameObject.FindGameObjectsWithTag("Props");
-       
+
         foreach (GameObject obj in objectToHide)
         {
             obj.GetComponent<Renderer>().enabled = false;
         }
 
+
         player = GameObject.Find("Player").transform;
         cameraObject = GameObject.Find("Main Camera").transform;
+
+        if (!player)
+            return;
+        if (!cameraObject)
+            return;
 
     }
 
@@ -46,15 +52,15 @@ public class CameraScript : MonoBehaviour {
         _hideObjects = new List<Transform>();
         _showOutsideObjects = new List<Transform>();
         InvokeRepeating("renderObjects", 0.0f, renderTime);
+        InvokeRepeating("transparentObjects", 0.0f, 0.35f);
 	}
 
 
 	void LateUpdate () 
     {
-        transparentObjects();
         //I This is just a simple code to simply make the camera follow the player.
         PlayerPOS = GameObject.FindGameObjectWithTag("Player").transform.transform.position;
-        GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+31, PlayerPOS.z-30);
+        GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+150, PlayerPOS.z-100);
 	}
 
 
@@ -66,10 +72,8 @@ public class CameraScript : MonoBehaviour {
 
         RaycastHit[] hits = Physics.RaycastAll(cameraObject.position, direction, distance, layerMask);
 
-
-
-        Debug.DrawRay(cameraObject.position, player.position, Color.green);
-        Debug.DrawLine(cameraObject.position, player.position, Color.blue);
+        //Debug.DrawRay(cameraObject.position, player.position, Color.green);
+        //Debug.DrawLine(cameraObject.position, player.position, Color.blue);
 
 
         //I When the raycast from the camera hit something between the player, the object will be added to the array
@@ -85,7 +89,6 @@ public class CameraScript : MonoBehaviour {
                 //I --- WORK IN PROGRESS TO ACHIEVE THE TRANSPARENCY ---------
                 _hideObjects.Add(currentHit);
                 currentHit.GetComponent<Renderer>().enabled = false;
-
             }
         }
 
@@ -108,8 +111,6 @@ public class CameraScript : MonoBehaviour {
                 //I between the camera ray to the player
                 //I the object is removed from the list and enabled the renderer
                 Transform wasHidden = _hideObjects[i];
-
-                Color newColor = new Color(1,1,1, 1f);
                 wasHidden.GetComponent<Renderer>().enabled = true;
                 _hideObjects.RemoveAt(i);
                 i--;

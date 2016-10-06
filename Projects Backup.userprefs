@@ -1,17 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Manager Scripts\SpawnManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\FemaleNPCScript.cs">
     <Files>
-      <File FileName="Assets\Scripts\CameraScript\CameraScript.cs" Line="156" Column="69" />
-      <File FileName="Assets\Scripts\AI\VisionConeEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CameraScript\CameraEditor.cs" Line="13" Column="5" />
-      <File FileName="Assets\Scripts\Player Script\PlayerMovement.cs" Line="154" Column="63" />
-      <File FileName="Assets\Scripts\Manager Scripts\ObjectPoolingManager.cs" Line="172" Column="34" />
-      <File FileName="Assets\Scripts\Manager Scripts\SpawnManager.cs" Line="15" Column="6" NotebookId="1" />
+      <File FileName="Assets\Scripts\AI\NPC.cs" Line="103" Column="50" />
+      <File FileName="Assets\Scripts\AI\IDamageable.cs" Line="15" Column="5" />
+      <File FileName="Assets\Scripts\Manager Scripts\ObjectPoolingManager.cs" Line="29" Column="5" />
+      <File FileName="Assets\Scripts\Manager Scripts\SpawnManager.cs" Line="59" Column="1" />
+      <File FileName="Assets\Scripts\AI\ConeOfVision.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\FemaleNPCScript.cs" Line="32" Column="5" NotebookId="1" />
+      <File FileName="Assets\Scripts\AI\MaleNPCScript.cs" Line="38" Column="9" NotebookId="1" />
+      <File FileName="Assets\Scripts\Player Script\PlayerMovement.cs" Line="9" Column="44" NotebookId="1" />
+      <File FileName="Assets\Scripts\Player Script\BulletScript.cs" Line="1" Column="1" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="I:\Projects Backup\Assets\Scripts\AI\NPC.cs" line="38" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

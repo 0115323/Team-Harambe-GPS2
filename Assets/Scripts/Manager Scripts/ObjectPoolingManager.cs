@@ -44,9 +44,14 @@ public class ObjectPoolingManager : MonoBehaviour
 
     void Start()
     {
-        
-        objPoolManager = this;
-
+        if (objPoolManager == null)
+        {
+            objPoolManager = this;
+        }
+        else if (objPoolManager != null)
+        {
+            Destroy(this.gameObject);
+        }
         //I Object pooling for the love bullets
 
         loveBulletsList = new List<GameObject>();
@@ -158,6 +163,7 @@ public class ObjectPoolingManager : MonoBehaviour
             GameObject femaleobj = (GameObject)Instantiate(femaleNPCType1);
             femaleobj.transform.parent = transform;
             femaleNPCList.Add(femaleobj);
+            femaleobj.SetActive(false);
             //Debug.Log(maxFemaleNPCPooling);
             if (FemaleNPCPooling > maxFemaleNPCPooling)
             {
@@ -182,6 +188,7 @@ public class ObjectPoolingManager : MonoBehaviour
             GameObject maleobj = (GameObject)Instantiate(maleNPCType1);
             maleobj.transform.parent = transform;
             maleNPCList.Add(maleobj);
+            maleobj.SetActive(false);
             if (MaleNPCPooling > maxMaleNPCPooling)
             {
                 return null;

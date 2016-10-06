@@ -26,12 +26,10 @@ public class PlayerMovement : MonoBehaviour
 	public ChangeMode currentGun;
 
 
-    public BulletScript bullet;
-
     public float timeBetweenShots;
     float shotTimer = 0f;
 
-    bool fired;
+    public bool fired;
 
 
 	// Use this for initialization
@@ -46,6 +44,15 @@ public class PlayerMovement : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody>();
         //I To find the reference to the camera
         mainCamera = FindObjectOfType<Camera>();
+
+        if (!moveControl)
+        {
+            return;
+        }
+        if (!shootControl)
+        {
+            return;
+        }
 
     }
 	

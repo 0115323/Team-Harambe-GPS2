@@ -4,18 +4,29 @@ using System.Collections;
 public class NPC: MonoBehaviour, IDamageable
 {
     public int startingAffectionPoint;
+    public int maxAffectionPoint;
+
+    protected float totalpercentage = 50f;
+    private float chance;
+
+    protected int totalAffectionPoint;
     protected int affectionPoint;
 
-    private ScoreManagerScript score;
-    public BulletScript loveBullet;
-    public BulletScript hateBullet;
+    protected ScoreManagerScript score;
 
     public NPCGender gender = NPCGender.Female;
 
+    NavMeshAgent agent;
+
+    protected Transform player;
+
+    protected bool fall;
 
     void Awake()
     {
+        agent = GetComponent<NavMeshAgent>();
         score = GameObject.Find("UI").GetComponent<ScoreManagerScript>();
+        player = GameObject.Find("Player").transform;
     }
 
 
@@ -41,8 +52,7 @@ public class NPC: MonoBehaviour, IDamageable
             
             if (affectionPoint <= 0)
             {
-                Die();
-                score.GetComponent<ScoreManagerScript>().haremMeter.CurrentVal += 5;
+                fall = true;
             }
         }
 
@@ -51,10 +61,7 @@ public class NPC: MonoBehaviour, IDamageable
 
             if (affectionPoint <= 0)
             {
-                
-                Die();
-
-                score.GetComponent<ScoreManagerScript>().yaoiMeter.CurrentVal += 5;
+                fall = true;
             }
         }
     }
@@ -62,39 +69,57 @@ public class NPC: MonoBehaviour, IDamageable
 
     public virtual void hateBulletTakeDamage(int damage)
     {
-        affectionPoint -= damage;
-
-        if (gender == NPCGender.Female)
-        {
-
-            if (affectionPoint <= 0)
-            {
-                Die();
-                score.GetComponent<ScoreManagerScript>().haremMeter.CurrentVal -= 5;
-            }
-        }
-
-        if (gender == NPCGender.Male)
-        {
-
-            if (affectionPoint <= 0)
-            {
-                Die();
-
-                score.GetComponent<ScoreManagerScript>().yaoiMeter.CurrentVal -= 5;
-            }
-        }
+        affectionPoint += damage;
     }
 
     public void Die()
     {
+
         this.gameObject.SetActive(false);
     }
 
 
     public virtual void OnEnable()
     {
+
+        fall = false;
+        chance = Random.Range(0f, totalpercentage);
         //I To avoid having an immortal love points!
-        affectionPoint = startingAffectionPoint;
+        totalAffectionPoint = Random.Range(startingAffectionPoint,maxAffectionPoint);
+
+        if (chance <= 5f)
+        {
+            affectionPoint = 1;
+            //Debug.Log("health: " + affectionPoint);
+        }
+        else
+        {
+            affectionPoint = totalAffectionPoint;
+        }
     }
+
+    private void GoToPlayer()
+    {
+        GetComponent<NavMeshAgent>().speed += 20;
+        GetComponent<NavMeshAgent>().destination = player.position;
+    }
+
+    void Update()
+    {
+        if (fall)
+        {
+            GoToPlayer();
+        }
+
+
+    }
+
+    public virtual void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name == "Player" && fall == true)
+        {
+            Die();
+        }
+    }
+
 }

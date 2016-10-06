@@ -7,12 +7,10 @@ public class SpawnManager : MonoBehaviour
 {
     //I Work in progress. Will be fully implemented
 
-
-    public float spawnTime;
-
     public Transform[] spawnPoints;
 
     public GameObject[] maleNPC;
+
     public GameObject[] femaleNPC;
 
 	void Start () 
@@ -30,6 +28,7 @@ public class SpawnManager : MonoBehaviour
 
 
         InvokeRepeating("SpawnFemaleNPC", 0, 3);
+
         InvokeRepeating("SpawnMaleNPC", 0, 4);
 	}
 	
@@ -46,6 +45,7 @@ public class SpawnManager : MonoBehaviour
         npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
         npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
         npcOBJ.SetActive(true);
+
     }
 
 
@@ -61,6 +61,7 @@ public class SpawnManager : MonoBehaviour
         if (npcOBJ == null)return;
         npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
         npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
+
         npcOBJ.SetActive(true);
     }
 }
