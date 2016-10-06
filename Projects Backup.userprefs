@@ -1,5 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AI\FemaleNPCScript.cs">
     <Files>
       <File FileName="Assets\Scripts\AI\NPC.cs" Line="103" Column="50" />
@@ -11,6 +12,17 @@
       <File FileName="Assets\Scripts\AI\MaleNPCScript.cs" Line="38" Column="9" NotebookId="1" />
       <File FileName="Assets\Scripts\Player Script\PlayerMovement.cs" Line="9" Column="44" NotebookId="1" />
       <File FileName="Assets\Scripts\Player Script\BulletScript.cs" Line="1" Column="1" NotebookId="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CameraScript\CameraScript.cs">
+    <Files>
+      <File FileName="Assets\Scripts\CameraScript\CameraScript.cs" Line="56" Column="124" />
+      <File FileName="Assets\Scripts\Manager Scripts\ObjectPoolingManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\VisionConeEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraScript\CameraEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Player Script\PlayerMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AI\ConeOfVision.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Manager Scripts\GameManager.cs" Line="1" Column="1" />
+>>>>>>> 11e61d64314c5a80194b246dc299bdcbdc1eb6cf
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

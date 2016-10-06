@@ -100,7 +100,6 @@ public class NPC: MonoBehaviour, IDamageable
 
     private void GoToPlayer()
     {
-        GetComponent<NavMeshAgent>().speed += 20;
         GetComponent<NavMeshAgent>().destination = player.position;
     }
 

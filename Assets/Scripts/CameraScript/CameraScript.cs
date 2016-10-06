@@ -61,6 +61,7 @@ public class CameraScript : MonoBehaviour {
         //I This is just a simple code to simply make the camera follow the player.
         PlayerPOS = GameObject.FindGameObjectWithTag("Player").transform.transform.position;
         GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+150, PlayerPOS.z-100);
+        GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y + 100, PlayerPOS.z - 100);
 	}
 
 
