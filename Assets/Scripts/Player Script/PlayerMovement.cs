@@ -44,16 +44,6 @@ public class PlayerMovement : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody>();
         //I To find the reference to the camera
         mainCamera = FindObjectOfType<Camera>();
-
-        if (!moveControl)
-        {
-            return;
-        }
-        if (!shootControl)
-        {
-            return;
-        }
-
     }
 	
 
@@ -67,10 +57,10 @@ public class PlayerMovement : MonoBehaviour
 
         //I We want to get a specific control and using a z value to move the player. If using a y value, it will move the player up to the sky.
         //I Uncomment this when want to test on PC.
-        //moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         moveVelocity = moveControl.InputDirection*movementSpeed;
 
-        //Vector3 targetDirection = new Vector3(moveControl.InputDirection.x, moveControl.InputDirection.y);
+        Vector3 targetDirection = new Vector3(moveControl.InputDirection.x, moveControl.InputDirection.y);
 
         //float rayLength;
         //I This code is for the overwrite the above code from using W,A,S,D key instead using the virtual joystick.
@@ -79,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         if (moveControl.InputDirection != Vector3.zero)
         {
             moveVelocity = moveControl.InputDirection*movementSpeed;
+
 
             //I This code is to rotate the player dependant on the joystick
             /*Quaternion targetRotation = Quaternion.LookRotation(moveControl.InputDirection, Vector3.up);

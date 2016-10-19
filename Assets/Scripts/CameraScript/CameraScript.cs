@@ -23,6 +23,9 @@ public class CameraScript : MonoBehaviour {
 
     public GameObject[] objectToHide;
 
+    public List<Material> originalMaterial;
+    public Material transparentMaterial;
+
     public float renderTime;
     void Awake()
     {
@@ -51,6 +54,7 @@ public class CameraScript : MonoBehaviour {
         //I Initialize the list to hide
         _hideObjects = new List<Transform>();
         _showOutsideObjects = new List<Transform>();
+        originalMaterial = new List<Material>();
         InvokeRepeating("renderObjects", 0.0f, renderTime);
         InvokeRepeating("transparentObjects", 0.0f, 0.35f);
 	}
@@ -89,7 +93,8 @@ public class CameraScript : MonoBehaviour {
                 //I the object is added into the list and disabled the renderer
                 //I --- WORK IN PROGRESS TO ACHIEVE THE TRANSPARENCY ---------
                 _hideObjects.Add(currentHit);
-                currentHit.GetComponent<Renderer>().enabled = false;
+                 originalMaterial.Add(currentHit.GetComponent<Renderer>().material);
+                currentHit.GetComponent<Renderer>().material = transparentMaterial;
             }
         }
 
@@ -112,7 +117,11 @@ public class CameraScript : MonoBehaviour {
                 //I between the camera ray to the player
                 //I the object is removed from the list and enabled the renderer
                 Transform wasHidden = _hideObjects[i];
-                wasHidden.GetComponent<Renderer>().enabled = true;
+                Material _materialOrigin = originalMaterial[i];
+
+                wasHidden.GetComponent<Renderer>().material = _materialOrigin;
+
+                originalMaterial.RemoveAt(i);
                 _hideObjects.RemoveAt(i);
                 i--;
             }
