@@ -1,45 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 
 public class SpawnManager : MonoBehaviour 
 {
-    //I Work in progress. Will be fully implemented
+    protected Transform player;
 
     public Transform[] spawnPoints;
 
-    public GameObject[] maleNPC;
+    public float spawnTime = 3f;
 
-    public GameObject[] femaleNPC;
-
-	void Start () 
+    void Awake()
     {
-        //I This function is to find the gameobject tagged with Spawners
-        GameObject[] spawner = GameObject.FindGameObjectsWithTag("Spawners");
-        //I To get the total length of spawner array and then add it to spawnpoints array
-        spawnPoints = new Transform[spawner.Length];
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
-        //I Convert every array of gameobject to a transform
-        for (int i = 0; i < spawnPoints.Length; i++)
-            spawnPoints[i] = spawner[i].transform;
-
-        //IDebug.Log(spawnPoints.Length);
-
-
-        InvokeRepeating("SpawnFemaleNPC", 0, 3);
-
-        InvokeRepeating("SpawnMaleNPC", 0, 4);
-	}
-	
-    void SpawnFemaleNPC()
+    public void spawnMales()
     {
-        femaleNPC = GameObject.FindGameObjectsWithTag("FemaleNPC");
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+        
+        GameObject maleNpcOBJ = ObjectPoolingManager.objPoolManager.GetMaleNPCType();
 
+        if (maleNpcOBJ == null)return;
+        maleNpcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
+        maleNpcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
+        maleNpcOBJ.SetActive(true);
+    }
 
+    public void spawnFemales()
+    {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
-        GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetFemaleNPCType1();
+        GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetFemaleNPCType();
 
         if (npcOBJ == null)return;
         npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
@@ -50,18 +42,4 @@ public class SpawnManager : MonoBehaviour
 
 
 
-    void SpawnMaleNPC()
-    {
-        maleNPC = GameObject.FindGameObjectsWithTag("MaleNPC");
-
-        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-
-        GameObject npcOBJ = ObjectPoolingManager.objPoolManager.GetMaleNPCType1();
-
-        if (npcOBJ == null)return;
-        npcOBJ.transform.position = spawnPoints[spawnPointIndex].position;
-        npcOBJ.transform.rotation = spawnPoints[spawnPointIndex].rotation;
-
-        npcOBJ.SetActive(true);
-    }
 }

@@ -10,7 +10,7 @@ using System.Collections;
 
 public class VirtualJoystick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDownHandler
 {
-
+    private GameManager gameManager;
     private Image joystickBG;
     private Image joystickImage;
 
@@ -20,6 +20,7 @@ public class VirtualJoystick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPoi
 
     void Start()
     {
+        gameManager = GameObject.Find("UI").GetComponent<GameManager>();
         joystickBG = GetComponent<Image>();
         //I To get the child from the image inside the joystick background
         joystickImage = transform.GetChild(0).GetComponent<Image>();
@@ -30,29 +31,28 @@ public class VirtualJoystick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPoi
         //Debug.Log("ON DRAG");
         //InputDirection = Vector3.zero;
 
-        Vector2 pos;
-        //Debug.Log("POS : " + pos);
+            Vector2 pos;
+            //Debug.Log("POS : " + pos);
 
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(joystickBG.rectTransform, ped.position, ped.pressEventCamera, out pos))
-        {
-            pos.x =sensitivity* (pos.x / joystickBG.rectTransform.sizeDelta.x);
-            pos.y =sensitivity* (pos.y / joystickBG.rectTransform.sizeDelta.y);
-
-
-            InputDirection = new Vector3(pos.x,0,pos.y);
-            //I 
-            InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
-
-            //I This code is to avoid the middle circle to get out from the image joystick background. It will keep inside it.
-            joystickImage.rectTransform.anchoredPosition = new Vector3
-            (InputDirection.x *(joystickBG.rectTransform.sizeDelta.x / 3), InputDirection.z * (joystickBG.rectTransform.sizeDelta.y/ 3));
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(joystickBG.rectTransform, ped.position, ped.pressEventCamera, out pos))
+            {
+                pos.x = sensitivity * (pos.x / joystickBG.rectTransform.sizeDelta.x);
+                pos.y = sensitivity * (pos.y / joystickBG.rectTransform.sizeDelta.y);
 
 
+                InputDirection = new Vector3(pos.x, 0, pos.y);
+                //I 
+                InputDirection = (InputDirection.magnitude > 1) ? InputDirection.normalized : InputDirection;
 
-            //IDebug.Log("OnDrag");
-            //IDebug.Log(InputDirection);
+                //I This code is to avoid the middle circle to get out from the image joystick background. It will keep inside it.
+                joystickImage.rectTransform.anchoredPosition = new Vector3(InputDirection.x * (joystickBG.rectTransform.sizeDelta.x / 3), InputDirection.z * (joystickBG.rectTransform.sizeDelta.y / 3));
 
-        }
+
+
+                //IDebug.Log("OnDrag");
+                //IDebug.Log(InputDirection);
+
+            }
     }
 
     public virtual void  OnPointerDown(PointerEventData ped)
@@ -62,8 +62,10 @@ public class VirtualJoystick : MonoBehaviour,IDragHandler,IPointerUpHandler,IPoi
 	
     public virtual void OnPointerUp(PointerEventData ped)
     {
-        InputDirection = Vector3.zero;
-        //I This is to reset the middle joystick button to reset to its original position instead of making it stick to the background and stuff.
-        joystickImage.rectTransform.anchoredPosition = Vector3.zero;
+        
+            InputDirection = Vector3.zero;
+            //I This is to reset the middle joystick button to reset to its original position instead of making it stick to the background and stuff.
+            joystickImage.rectTransform.anchoredPosition = Vector3.zero;
+
     }
 }

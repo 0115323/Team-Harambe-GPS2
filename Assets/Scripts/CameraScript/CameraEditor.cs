@@ -11,7 +11,9 @@ public class CameraEditor : Editor {
     {
         CameraScript cs = (CameraScript)target;
         Handles.color = Color.red;
-        Handles.DrawWireArc (cs.player.transform.position, Vector3.up, Vector3.forward, 360, cs.renderRadius);    
+        Handles.DrawWireArc (cs.player.transform.position, Vector3.up, Vector3.forward, 360, cs.renderRadius);
+        Handles.color = Color.magenta;
+        Handles.DrawWireArc (cs.player.transform.position, Vector3.up, Vector3.forward, 360, cs.disableNPCRadius);   
     }
 
 }

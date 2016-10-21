@@ -5,7 +5,14 @@ using UnityEngine.UI;
 
 public class ChangeMode : MonoBehaviour {
 
+    private GameManager gameManager;
+
     public Color newColor;
+
+
+    public GameObject shop;
+
+    private PlayerMovement player;
 
     public ShootingType shootType = ShootingType.LoveType;
     public Transform firePoint;
@@ -13,16 +20,29 @@ public class ChangeMode : MonoBehaviour {
 	public GunType gunType;
 	int buttonPress = 0;
 
-    public Button btnObj;
+    public Button gunBtn;
+    public Button changeBulletbtn;
+
+    public Color originalColor;
+
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        gameManager = GameObject.Find("UI").GetComponent<GameManager>();
+        originalColor = changeBulletbtn.image.color;
+    }
 
     public void ChangeBullet()
     {
     if (shootType == ShootingType.LoveType)
     {
+            changeBulletbtn.image.color = Color.black;
             shootType = ShootingType.HateType;
     }
     else if(shootType == ShootingType.HateType)
     {
+            changeBulletbtn.image.color = originalColor;
             shootType = ShootingType.LoveType;
     }
     }
@@ -36,14 +56,14 @@ public class ChangeMode : MonoBehaviour {
 		if(buttonPress == 1)
 		{
 			gunType = GunType.Rifle;
-            btnObj.GetComponentInChildren<Text>().text ="Rifle";
+            gunBtn.GetComponentInChildren<Text>().text ="Rifle";
 
 			//Debug.Log("Rifle");
 		}
 		if(buttonPress == 2)
 		{
 			gunType = GunType.Shotgun;
-            btnObj.GetComponentInChildren<Text>().text ="Shotgun";
+            gunBtn.GetComponentInChildren<Text>().text ="Shotgun";
 			//Debug.Log("Shotgun");
 		}
 
@@ -51,9 +71,33 @@ public class ChangeMode : MonoBehaviour {
 		{
 			buttonPress = 0;
 			gunType =  GunType.Pistol;
-            btnObj.GetComponentInChildren<Text>().text ="Pistol";
+            gunBtn.GetComponentInChildren<Text>().text ="Pistol";
 			//Debug.Log("Pistol");
 		}
 	}
+
+    public void UnlockShotgun()
+    {
+        buttonPress += 1;
+        if (buttonPress == 1)
+        {
+            gunBtn.GetComponent<Button>().interactable = true;
+        }
+    }
+
+
+    public void OpenShop()
+    {
+        gameManager.gunShopInterface.gameObject.SetActive(true);
+        player.shop.gameObject.SetActive(false);
+        Time.timeScale = 0;
+
+    }
+
+    public void CloseShop()
+    {
+        gameManager.gunShopInterface.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+    }
 
 }

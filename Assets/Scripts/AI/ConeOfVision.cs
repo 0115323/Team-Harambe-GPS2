@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class ConeOfVision : MonoBehaviour 
 {
+    public StalkerBehaviour stalkerState = StalkerBehaviour.Normal;
+
+
 	//D to declare variable for radius and angle
 	public float viewRadius;
 	[Range(0,360)]
@@ -16,25 +19,74 @@ public class ConeOfVision : MonoBehaviour
 	public List<Transform> visibleTargets = new List <Transform> ();
 
     NavMeshAgent agent;
+    public int num = 0;
+
+    public float minDist;
+    public float speed;
+    //D to set AI to walk to random waypoints
+    public bool rand = false;
+
+    public Transform[] way;
+    private int wayPointIndex;
 
     public Transform player;
+
+    //public GameObject[] way;
 
     public bool see;
 
     void Start()
     {
+
         agent = GetComponent<NavMeshAgent>();
+
+        GameObject[] waypoints = GameObject.FindGameObjectsWithTag("Waypoints");
+
+        way = new Transform[waypoints.Length];
+
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            way[i] = waypoints[i].transform;
+        }
+
+        wayPointIndex = Random.Range(0, way.Length);
+
     }
 
     void LateUpdate()
     {
-        see = false;
+        agent.speed = speed;
+
         FindVisibleTargets();
-        if(see)
+
+        float dist = Vector3.Distance(
+                         gameObject.transform.position, way[wayPointIndex].transform.position);
+        
+        if (stalkerState == StalkerBehaviour.Normal)
         {
-            GetComponent<NavMeshAgent>().destination = player.position;
+                agent.SetDestination(way[wayPointIndex].transform.position);
+
+                gameObject.transform.LookAt(way[wayPointIndex].transform.position);
+                if (!rand)
+                {
+                    if (Vector3.Distance(this.transform.position, way[wayPointIndex].transform.position) >= 2)
+                    {
+                    agent.SetDestination(way[wayPointIndex].transform.position);
+
+                    }
+                    else if (Vector3.Distance(this.transform.position, way[wayPointIndex].transform.position) <= 2)
+                    {
+                        wayPointIndex = Random.Range(0, wayPointIndex);                    
+                         
+                    }
+                }
         }
+            Debug.Log(dist);
+            Debug.Log(way[wayPointIndex]);
+
     }
+    
+    
 
 
 	//D to detect targets within range(creates a triangle to the stalker and the object)
@@ -56,7 +108,18 @@ public class ConeOfVision : MonoBehaviour
 
 				if (!Physics.Raycast (transform.position, dirToTarget, distToTarget, wallMask)) 
 				{
-                    see = true;
+                    stalkerState = StalkerBehaviour.InSight;
+                        
+                    if(stalkerState == StalkerBehaviour.InSight)
+                    {
+                        if (Vector3.Distance(transform.position, player.position) >= minDist)
+                        {
+                            transform.LookAt(player);
+                            transform.position += transform.forward * speed * Time.deltaTime;
+
+                        }
+                    }
+
 				}
 
 			}
@@ -74,8 +137,6 @@ public class ConeOfVision : MonoBehaviour
 
 	}
 
-
-
-	}
+}
 
 

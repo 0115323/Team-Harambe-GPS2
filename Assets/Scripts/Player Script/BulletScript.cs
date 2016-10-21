@@ -10,9 +10,16 @@ public class BulletScript : MonoBehaviour {
     protected int damage = 1;
     public int totalDamage = 1;
 
+    public PlayerMovement player;
+
     public BulletType bulletType = BulletType.LoveBullet;
 
     public TrailRenderer trailrender;
+
+    void Awake()
+    {
+        player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+    }
 
     void Update()
     {
@@ -22,7 +29,7 @@ public class BulletScript : MonoBehaviour {
 
     void OnEnable()
     {
-        Invoke("Destroy", 2f);
+        Invoke("Destroy", player.GetComponent<PlayerMovement>().bulletRange);
     }
 
     void Destroy()

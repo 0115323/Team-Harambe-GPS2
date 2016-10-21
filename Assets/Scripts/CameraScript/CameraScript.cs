@@ -13,13 +13,16 @@ public class CameraScript : MonoBehaviour {
 
     public List<Transform> _hideObjects;
     public List<Transform> _showOutsideObjects;
+    public List<Transform> _npcCounts;
 
     public LayerMask layerMask;
+    public LayerMask npcOutsideRange;
 
     private bool isHit;
     private bool isRendering;
 
     public float renderRadius;
+    public float disableNPCRadius;
 
     public GameObject[] objectToHide;
 
@@ -27,6 +30,10 @@ public class CameraScript : MonoBehaviour {
     public Material transparentMaterial;
 
     public float renderTime;
+
+
+    bool disablingNPC;
+
     void Awake()
     {
 
@@ -40,12 +47,6 @@ public class CameraScript : MonoBehaviour {
 
         player = GameObject.Find("Player").transform;
         cameraObject = GameObject.Find("Main Camera").transform;
-
-        if (!player)
-            return;
-        if (!cameraObject)
-            return;
-
     }
 
 	// Use this for initialization
@@ -57,15 +58,16 @@ public class CameraScript : MonoBehaviour {
         originalMaterial = new List<Material>();
         InvokeRepeating("renderObjects", 0.0f, renderTime);
         InvokeRepeating("transparentObjects", 0.0f, 0.35f);
+        InvokeRepeating("disableNPC", 0.0f, 3f);
 	}
 
 
 	void LateUpdate () 
     {
         //I This is just a simple code to simply make the camera follow the player.
-        PlayerPOS = GameObject.FindGameObjectWithTag("Player").transform.transform.position;
-        GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+150, PlayerPOS.z-100);
-        GameObject.Find("Main Camera").transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y + 100, PlayerPOS.z - 100);
+        PlayerPOS = player.transform.position;
+        transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y+150, PlayerPOS.z-100);
+        transform.position = new Vector3(PlayerPOS.x, PlayerPOS.y + 100, PlayerPOS.z - 100);
 	}
 
 
@@ -169,9 +171,45 @@ public class CameraScript : MonoBehaviour {
                 _showOutsideObjects.RemoveAt(i);
                 i--;
             }
+        }
+
+    }
+
+    private void disableNPC()
+    {
+        Collider[] disableNPCs = Physics.OverlapSphere (player.transform.position, disableNPCRadius, npcOutsideRange);
+
+        for (int i = 0; i < disableNPCs.Length; i++)
+        {
+            Transform _npcInRange = disableNPCs[i].transform;
+
+            if (!_npcCounts.Contains(_npcInRange))
+            {
+                _npcCounts.Add(_npcInRange);
+            }
 
         }
 
+        for (int i = 0; i < _npcCounts.Count; i++)
+        {
+            disablingNPC = false;
+            for (int j = 0; j < disableNPCs.Length; j++)
+            {
+                if (disableNPCs[j].transform == _npcCounts[i])
+                {
+                    disablingNPC = true;
+                    break;
+                }
+            }
+
+            if (disablingNPC == false)
+            {
+                Transform npcInRadius = _npcCounts[i];
+                npcInRadius.gameObject.SetActive(false);
+                _npcCounts.RemoveAt(i);
+                i--;
+            }
+        }
     }
 
 

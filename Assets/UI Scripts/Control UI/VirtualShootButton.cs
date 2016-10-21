@@ -5,7 +5,7 @@ using System.Collections;
 
 public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,IPointerDownHandler
 {
-
+    private GameManager gameManager;
     private Image shootButtonBG;
     private Image shootButtonJoyStickImage;
 
@@ -15,6 +15,7 @@ public class VirtualShootButton : MonoBehaviour,IDragHandler,IPointerUpHandler,I
 
     void Start()
     {
+        gameManager = GameObject.Find("UI").GetComponent<GameManager>();
         shootButtonBG = GetComponent<Image>();
         //I To get the child from the image inside the joystick background
         shootButtonJoyStickImage = transform.GetChild(0).GetComponent<Image>();

@@ -45,6 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\BgmManagerScript.cs" />
+     <Compile Include="Assets\BulletRangeScript.cs" />
      <Compile Include="Assets\FPSDisplay.cs" />
      <Compile Include="Assets\Scripts\AI\ConeOfVision.cs" />
      <Compile Include="Assets\Scripts\AI\FemaleNPCScript.cs" />
@@ -62,13 +64,17 @@
      <Compile Include="Assets\Scripts\Manager Scripts\ObjectPoolingManager.cs" />
      <Compile Include="Assets\Scripts\Manager Scripts\ScoreManagerScript.cs" />
      <Compile Include="Assets\Scripts\Manager Scripts\SpawnManager.cs" />
+     <Compile Include="Assets\Scripts\Manager Scripts\SpawnTrigger.cs" />
+     <Compile Include="Assets\Scripts\Manager Scripts\SpawnTriggerEditor.cs" />
      <Compile Include="Assets\Scripts\Player Script\BulletScript.cs" />
      <Compile Include="Assets\Scripts\Player Script\ChangeMode.cs" />
      <Compile Include="Assets\Scripts\Player Script\PlayerMovement.cs" />
+     <Compile Include="Assets\SoundControllerScript.cs" />
      <Compile Include="Assets\UI Scripts\Control UI\VirtualJoystick.cs" />
      <Compile Include="Assets\UI Scripts\Control UI\VirtualShootButton.cs" />
      <Compile Include="Assets\UI Scripts\UI Scripts\BarScript.cs" />
      <Compile Include="Assets\UI Scripts\UI Scripts\Stat.cs" />
+     <Compile Include="Assets\UIManagerScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>L:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
