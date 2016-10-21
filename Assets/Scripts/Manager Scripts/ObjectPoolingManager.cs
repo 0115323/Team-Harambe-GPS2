@@ -24,11 +24,12 @@ public class ObjectPoolingManager : MonoBehaviour
     public bool willGrow = true;
 
     //I ============== FOR THE NPC POOL OBJECT ====================
-    List<GameObject> femaleNPCList;
-    List<GameObject> maleNPCList;
+    public List<GameObject>[] femaleNPCList;
+    public List<GameObject>[] maleNPCList;
 
-    public GameObject femaleNPCType1;
-    public GameObject maleNPCType1;
+    public GameObject[] femaleNPCType;
+    public GameObject[] maleNPCType;
+
     //I ============== END OF THE NPC POOL OBJECT =================
 
     private int FemaleNPCPooling = 0;
@@ -41,6 +42,7 @@ public class ObjectPoolingManager : MonoBehaviour
 
 
     //I All THIS SCRIPT WILL BE COMMENTED LATER ON. STILL WATCHING THE TUTORIAL TO UNDERSTAND HOW THE CODE REALLY WORKS.
+    public int randomGenerate;
 
     void Start()
     {
@@ -74,26 +76,29 @@ public class ObjectPoolingManager : MonoBehaviour
             obj.SetActive(false);
             hateBulletsList.Add(obj);
         }
+        //femalePrefab = femaleNPCList[Random.Range(0, femaleNPCList.Length)];
 
-        femaleNPCList = new List<GameObject>();
-        for (int i = 0; i < 3; i++)
+        femaleNPCList = new List<GameObject>[femaleNPCType.Length];
+        for (int i = 0; i <femaleNPCType.Length; i++)
         {
-            GameObject obj = (GameObject)Instantiate(femaleNPCType1);
+            randomGenerate = Random.Range(0, femaleNPCList.Length);
+            femaleNPCList[i] = new List<GameObject>();
+            GameObject obj = (GameObject)Instantiate(femaleNPCType[randomGenerate]);
             obj.transform.parent = transform;
             obj.SetActive(false);
-            femaleNPCList.Add(obj);
         }
 
 
         //I Object pooling for the hate bullets
 
-        maleNPCList = new List<GameObject>();
-        for (int i = 0; i < 3; i++)
+        maleNPCList = new List<GameObject>[maleNPCType.Length];
+        for (int i = 0; i < maleNPCType.Length; i++)
         {
-            GameObject obj = (GameObject)Instantiate(maleNPCType1);
+            randomGenerate = Random.Range(0, maleNPCList.Length);
+            maleNPCList[i] = new List<GameObject>();
+            GameObject obj = (GameObject)Instantiate(maleNPCType[randomGenerate]);
             obj.transform.parent = transform;
             obj.SetActive(false);
-            maleNPCList.Add(obj);
         }
 
     }
@@ -148,51 +153,65 @@ public class ObjectPoolingManager : MonoBehaviour
     //I ============== FOR THE SPAWN MANAGER ======================
 
     //I This is for the player to get a hate bullet pooled object
-    public GameObject GetFemaleNPCType1()
+    public GameObject GetFemaleNPCType()
     {
-        for (int i = 0; i < femaleNPCList.Count; i++)
+
+        int randomizedIndex = Random.Range(0, femaleNPCList.Length);
+
+        for (int i = 0; i < femaleNPCList[randomizedIndex].Count; i++)
         {
-            if (!femaleNPCList[i].activeInHierarchy)
+            GameObject go = femaleNPCList[randomizedIndex][i];
+            if (go == null)
             {
-                return femaleNPCList[i];
+                go = (GameObject)Instantiate(femaleNPCType[randomizedIndex]);
+                go.transform.parent = transform;
+                go.SetActive(false);
+                femaleNPCList[randomizedIndex][i] = go;
+                return go;
+            }
+            if (!go.activeInHierarchy)
+            {
+                return go;
             }
         }
-        if (FemaleNPCPooling < maxFemaleNPCPooling)
+        if (FemaleNPCPooling<=maxFemaleNPCPooling)
         {
             FemaleNPCPooling++;
-            GameObject femaleobj = (GameObject)Instantiate(femaleNPCType1);
-            femaleobj.transform.parent = transform;
-            femaleNPCList.Add(femaleobj);
-            femaleobj.SetActive(false);
-            //Debug.Log(maxFemaleNPCPooling);
-            if (FemaleNPCPooling > maxFemaleNPCPooling)
-            {
-                return null;
-            }
+            GameObject obj = (GameObject)Instantiate(femaleNPCType[randomizedIndex]);
+            obj.transform.parent = transform;
+            femaleNPCList[randomizedIndex].Add(obj);
         }
         return null;
     }
 
-    public GameObject GetMaleNPCType1()
+    public GameObject GetMaleNPCType()
     {
-        for (int i = 0; i < maleNPCList.Count; i++)
+        int randomizedIndex = Random.Range(0, maleNPCList.Length);
+
+        for (int i = 0; i < maleNPCList[randomizedIndex].Count; i++)
         {
-            if (!maleNPCList[i].activeInHierarchy)
+            GameObject mo = maleNPCList[randomizedIndex][i];
+
+            if (mo == null)
             {
-                return maleNPCList[i];
+                mo = (GameObject)Instantiate(maleNPCType[randomizedIndex]);
+                mo.transform.parent = transform;
+                mo.SetActive(false);
+                maleNPCList[randomizedIndex][i] = mo;
+                return mo;
+            }
+
+            if (!mo.activeInHierarchy)
+            {
+                return mo;
             }
         }
-        if (MaleNPCPooling < maxMaleNPCPooling)
+        if (MaleNPCPooling <= maxMaleNPCPooling)
         {
             MaleNPCPooling++;
-            GameObject maleobj = (GameObject)Instantiate(maleNPCType1);
-            maleobj.transform.parent = transform;
-            maleNPCList.Add(maleobj);
-            maleobj.SetActive(false);
-            if (MaleNPCPooling > maxMaleNPCPooling)
-            {
-                return null;
-            }
+            GameObject obj = (GameObject)Instantiate(maleNPCType[randomizedIndex]);
+            obj.transform.parent = transform;
+            maleNPCList[randomizedIndex].Add(obj);
         }
         return null;
     }

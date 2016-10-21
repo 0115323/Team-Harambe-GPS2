@@ -19,7 +19,11 @@ public class FemaleNPCScript : NPC
     {
         if (damage >= affectionPoint)
         {
-            Destroy(Instantiate(loveParticle.gameObject, gameObject.transform.position, Quaternion.FromToRotation(Vector3.forward,Vector3.up)) as GameObject, loveParticle.startLifetime);
+            if (!callOnce)
+            {
+                Destroy(Instantiate(loveParticle.gameObject, gameObject.transform.position, Quaternion.FromToRotation(Vector3.forward,Vector3.up)) as GameObject, loveParticle.startLifetime);
+                callOnce = true;
+            }
         }
         base.loveTakeHit(damage, col);
     }

@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
 
 public static GameManager instance;
+    public float timer;
 
-public GameObject loader;
+    public GameObject loader;
 
     public bool testingMode;
+
+    public GameObject gunShopInterface;
 
 void Awake()
 {
@@ -24,8 +27,15 @@ void Awake()
         }
 }
 
+    void Start()
+    {
+        gunShopInterface = GameObject.Find("GunShop");
+        gunShopInterface.gameObject.SetActive(false);
+    }
+
     void Update()
     {
+        timer = Time.timeScale;
         if (testingMode)
         {
             int fingerCount = 0;

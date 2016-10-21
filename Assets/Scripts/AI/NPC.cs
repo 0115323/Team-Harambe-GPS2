@@ -21,6 +21,8 @@ public class NPC: MonoBehaviour, IDamageable
     protected Transform player;
 
     protected bool fall;
+    protected bool callOnce;
+
 
     void Awake()
     {
@@ -83,6 +85,7 @@ public class NPC: MonoBehaviour, IDamageable
     {
 
         fall = false;
+        callOnce = false;
         chance = Random.Range(0f, totalpercentage);
         //I To avoid having an immortal love points!
         totalAffectionPoint = Random.Range(startingAffectionPoint,maxAffectionPoint);
