@@ -180,6 +180,8 @@ public class ObjectPoolingManager : MonoBehaviour
             GameObject obj = (GameObject)Instantiate(femaleNPCType[randomizedIndex]);
             obj.transform.parent = transform;
             femaleNPCList[randomizedIndex].Add(obj);
+            return obj;
+
         }
         return null;
     }
@@ -212,6 +214,7 @@ public class ObjectPoolingManager : MonoBehaviour
             GameObject obj = (GameObject)Instantiate(maleNPCType[randomizedIndex]);
             obj.transform.parent = transform;
             maleNPCList[randomizedIndex].Add(obj);
+            return obj;
         }
         return null;
     }

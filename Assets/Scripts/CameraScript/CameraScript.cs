@@ -30,6 +30,7 @@ public class CameraScript : MonoBehaviour {
     public Material transparentMaterial;
 
     public float renderTime;
+    public float disableNPCTime;
 
 
     bool disablingNPC;
@@ -58,7 +59,7 @@ public class CameraScript : MonoBehaviour {
         originalMaterial = new List<Material>();
         InvokeRepeating("renderObjects", 0.0f, renderTime);
         InvokeRepeating("transparentObjects", 0.0f, 0.35f);
-        InvokeRepeating("disableNPC", 0.0f, 3f);
+        InvokeRepeating("disableNPC", 0.0f, disableNPCTime);
 	}
 
 

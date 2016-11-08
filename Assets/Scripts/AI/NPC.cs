@@ -1,34 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NPC: MonoBehaviour, IDamageable
 {
+    public enum NPCBehaviour
+    {
+        Normal,
+        Love,
+        Hate,
+        Running
+    }
+
     public int startingAffectionPoint;
     public int maxAffectionPoint;
 
     protected float totalpercentage = 50f;
     private float chance;
 
-    protected int totalAffectionPoint;
+    public int totalAffectionPoint;
     protected int affectionPoint;
 
     protected ScoreManagerScript score;
 
     public NPCGender gender = NPCGender.Female;
+    public NPCBehaviour behaviour = NPCBehaviour.Normal;
+
+
+    public Transform player;
+    public GameObject[] runPoint;
+
+    public bool loveCallOnce;
+    public bool hateCallOnce;
 
     NavMeshAgent agent;
 
-    protected Transform player;
+    public float updatePathTime;
 
-    protected bool fall;
-    protected bool callOnce;
+    int randomizedIndex;
 
+    Vector3 runPosition;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        score = GameObject.Find("UI").GetComponent<ScoreManagerScript>();
+        score = GameObject.FindObjectOfType<ScoreManagerScript>();
         player = GameObject.Find("Player").transform;
+        runPoint = GameObject.FindGameObjectsWithTag("RunPoint");
     }
 
 
@@ -47,45 +65,68 @@ public class NPC: MonoBehaviour, IDamageable
 
     public virtual void loveBulletTakeDamage(int damage)
     {
-        affectionPoint -= damage;
+        totalAffectionPoint -= damage;
 
         if (gender == NPCGender.Female)
         {
-            
-            if (affectionPoint <= 0)
+            if (totalAffectionPoint <= damage)
             {
-                fall = true;
+                gameObject.layer = LayerMask.NameToLayer("Fall");
+                behaviour = NPCBehaviour.Love;
             }
         }
 
-        if (gender == NPCGender.Male)
+        else if (gender == NPCGender.Male)
         {
-
-            if (affectionPoint <= 0)
+            if (totalAffectionPoint <= damage)
             {
-                fall = true;
+                gameObject.layer = LayerMask.NameToLayer("Fall");
+                behaviour = NPCBehaviour.Love;
             }
         }
+
     }
 
 
     public virtual void hateBulletTakeDamage(int damage)
     {
-        affectionPoint += damage;
+        totalAffectionPoint += damage;
+
+        if (gender == NPCGender.Female)
+        {
+            if (totalAffectionPoint >= damage)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Hate");
+                behaviour = NPCBehaviour.Hate;
+            }
+
+        }
+
+        else if (gender == NPCGender.Male)
+        {
+            if (totalAffectionPoint >= damage)
+            {
+                gameObject.layer = LayerMask.NameToLayer("Hate");
+                behaviour = NPCBehaviour.Hate;
+            }
+        }
     }
 
-    public void Die()
+    public void OnDisable()
     {
-
+        behaviour = NPCBehaviour.Normal;
+        loveCallOnce = false;
+        hateCallOnce = false;
+        agent.enabled = false;
+        gameObject.layer = LayerMask.NameToLayer("NPC");
+        StopCoroutine(UpdatePath());
         this.gameObject.SetActive(false);
     }
 
 
     public virtual void OnEnable()
     {
-
-        fall = false;
-        callOnce = false;
+        agent.enabled = true;
         chance = Random.Range(0f, totalpercentage);
         //I To avoid having an immortal love points!
         totalAffectionPoint = Random.Range(startingAffectionPoint,maxAffectionPoint);
@@ -93,34 +134,44 @@ public class NPC: MonoBehaviour, IDamageable
         if (chance <= 5f)
         {
             affectionPoint = 1;
-            //Debug.Log("health: " + affectionPoint);
         }
         else
         {
             affectionPoint = totalAffectionPoint;
         }
-    }
-
-    private void GoToPlayer()
-    {
-        GetComponent<NavMeshAgent>().destination = player.position;
-    }
-
-    void Update()
-    {
-        if (fall)
-        {
-            GoToPlayer();
-        }
-
-
+        randomizedIndex = Random.Range(0, runPoint.Length);
+        StartCoroutine(UpdatePath());
     }
 
     public virtual void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.name == "Player" && fall == true)
+        if (col.gameObject.tag == "Player" && behaviour==NPCBehaviour.Love)
         {
-            Die();
+            OnDisable();
+        }
+    }
+
+    IEnumerator UpdatePath()
+    {
+        while (gameObject.activeSelf)
+        {
+            float runningPoint;
+            if (behaviour == NPCBehaviour.Love)
+            {
+                agent.speed = 14;
+                Vector3 playerPosition = new Vector3(player.position.x, 0, player.position.z);
+                agent.SetDestination(playerPosition);
+            }
+            if (behaviour == NPCBehaviour.Hate)
+            {
+                agent.speed = 50;
+                runPosition = new Vector3(runPoint[randomizedIndex].transform.position.x, 0, runPoint[randomizedIndex].transform.position.z);
+                runningPoint = runPoint[randomizedIndex].transform.position.magnitude;
+                agent.SetDestination(runPoint[randomizedIndex].transform.position);
+
+            }
+
+            yield return new WaitForSeconds(updatePathTime);
         }
     }
 

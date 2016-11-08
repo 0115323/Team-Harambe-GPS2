@@ -9,7 +9,6 @@ namespace Manager
     public class LoadManager : MonoBehaviour {
 
         public GameObject objPoolingManager;
-        public GameObject soundManager;
 
         public GameObject spawnManager;
 
@@ -21,11 +20,6 @@ namespace Manager
                Instantiate(objPoolingManager);
             }
 
-            //I To create the sound Manager
-            if (GameManager.instance != null)
-            {
-                Instantiate(soundManager);
-            }
             if (GameManager.instance != null)
             {
                 Instantiate(spawnManager);

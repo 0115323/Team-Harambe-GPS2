@@ -56,14 +56,14 @@ public class ChangeMode : MonoBehaviour {
 		if(buttonPress == 1)
 		{
 			gunType = GunType.Rifle;
-            gunBtn.GetComponentInChildren<Text>().text ="Rifle";
+            //gunBtn.GetComponentInChildren<Text>().text ="Rifle";
 
 			//Debug.Log("Rifle");
 		}
 		if(buttonPress == 2)
 		{
 			gunType = GunType.Shotgun;
-            gunBtn.GetComponentInChildren<Text>().text ="Shotgun";
+            //gunBtn.GetComponentInChildren<Text>().text ="Shotgun";
 			//Debug.Log("Shotgun");
 		}
 
@@ -71,7 +71,7 @@ public class ChangeMode : MonoBehaviour {
 		{
 			buttonPress = 0;
 			gunType =  GunType.Pistol;
-            gunBtn.GetComponentInChildren<Text>().text ="Pistol";
+            //gunBtn.GetComponentInChildren<Text>().text ="Pistol";
 			//Debug.Log("Pistol");
 		}
 	}
